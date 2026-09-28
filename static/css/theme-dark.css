@@ -1,0 +1,161 @@
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --theme-background: #1e1b18;
+  --theme-surface: rgb(36 24 18 / 88%);
+  --theme-surface-muted: #342d27;
+  --theme-inactive: #342d27;
+  --theme-accent: #ff9f43;
+  --theme-text: #f5e6c8;
+  --theme-text-muted: #c9b99a;
+  --theme-border: #6a5138;
+  --radius-surface: 18px;
+  --radius-card: 14px;
+  --radius-control: 9px;
+  --radius-icon: 10px;
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --space-5: 28px;
+  --surface-border: color-mix(in srgb, var(--theme-border) 76%, transparent);
+  --control-border: color-mix(in srgb, var(--theme-border) 82%, transparent);
+}
+
+body,
+.content,
+.filter-area {
+  background: var(--theme-background);
+  color: var(--theme-text);
+}
+
+.header,
+.sidebar,
+.player-bar,
+.track-card,
+.settings-window,
+.profile-dropdown,
+.date-range-popover {
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+}
+
+.header,
+.sidebar,
+.player-bar,
+.filter-area,
+.track-card,
+.settings-window {
+  border-color: var(--theme-border);
+}
+
+button,
+.filter-field select,
+.badge,
+.settings-panel input,
+.settings-panel select,
+.profile-avatar-btn {
+  background: var(--theme-inactive);
+  color: var(--theme-text);
+  border-color: var(--theme-accent);
+}
+
+button:hover,
+.filter-field select:hover,
+.settings-tab:hover,
+.settings-tab.active,
+.profile-dropdown :is(a, button):hover {
+  background: #453829;
+  color: var(--theme-text);
+}
+
+.track-description,
+.progress-container,
+.card-progress-container {
+  background: #3a322b;
+  border-color: var(--theme-border);
+  color: var(--theme-text-muted);
+}
+
+.track-artist,
+.player-text .artist,
+.settings-panel label,
+.settings-nav h3,
+.time-stamp {
+  color: var(--theme-text-muted);
+}
+
+.card-progress-bar,
+.progress-bar,
+.progress-thumb {
+  background: var(--theme-accent);
+}
+
+.player-icon-btn.main-play,
+.settings-footer button {
+  background: var(--theme-accent);
+  color: #1e1b18;
+  border-color: var(--theme-accent);
+}
+
+.filter-actions button,
+.filter-calendar-btn,
+.filter-form-actions button:first-child {
+  border-color: var(--theme-accent);
+}
+
+.profile-dropdown :is(a, button),
+.profile-logout {
+  min-width: 0;
+  height: auto;
+  background: transparent !important;
+  color: var(--theme-text) !important;
+}
+
+.settings-secondary,
+.add-tracks-placeholder {
+  min-width: 110px;
+  height: var(--button-size);
+  border-color: var(--theme-accent) !important;
+  background: var(--theme-accent) !important;
+  color: var(--theme-background) !important;
+}
+
+.creation-footer .settings-secondary,
+.creation-footer .creation-submit {
+  min-width: 110px;
+  height: var(--button-size);
+}
+
+.filter-field select,
+.filter-field select option,
+.creation-body input[list] {
+  color-scheme: dark;
+  background: var(--theme-inactive);
+  color: var(--theme-text);
+  border-color: var(--theme-accent);
+}
+
+.profile-dropdown-divider,
+.settings-panel hr {
+  background: var(--theme-border);
+  border-color: var(--theme-border);
+}
+
+.settings-nav {
+  background: #241f1b;
+  border-color: var(--theme-border);
+}
+.settings-modal {
+  background: rgb(0 0 0 / 60%);
+}
+
+.filter-area button,
+.filter-area .filter-field select {
+  border-color: var(--theme-accent);
+}
+.filter-area .rating-filter,
+.filter-area .rating-filter input {
+  border-color: var(--theme-accent);
+  accent-color: var(--theme-accent);
+}

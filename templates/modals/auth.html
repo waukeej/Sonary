@@ -1,0 +1,52 @@
+<div class="settings-modal auth-modal" id="loginModal" hidden>
+  <div class="settings-window" role="dialog" aria-modal="true">
+    <button class="settings-close" type="button" aria-label="Закрыть">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <section class="settings-content">
+      <h2>Войти</h2>
+      <form class="auth-form" method="post">
+        <label>Логин или почта<input required type="text" /></label
+        ><label>Пароль<input required type="password" /></label
+        ><button type="submit">Войти</button>
+      </form>
+    </section>
+  </div>
+</div>
+<div class="settings-modal auth-modal" id="registerModal" hidden>
+  <div class="settings-window" role="dialog" aria-modal="true">
+    <button class="settings-close" type="button" aria-label="Закрыть">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <section class="settings-content">
+      <h2>Зарегистрироваться</h2>
+      <form class="auth-form" method="post">
+        <label>Имя<input required type="text" /></label
+        ><label>Почта<input required type="email" /></label
+        ><label>Пароль<input required type="password" /></label
+        ><button type="submit">Зарегистрироваться</button>
+      </form>
+    </section>
+  </div>
+</div>
+<div class="settings-modal logout-confirm-modal" id="logoutConfirmModal" hidden>
+  <div
+    class="settings-window logout-confirm-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="logoutConfirmTitle"
+  >
+    <button class="settings-close" type="button" aria-label="Закрыть">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <section class="settings-content">
+      <h2 id="logoutConfirmTitle">
+        Вы уверены, что хотите выйти из учётной записи?
+      </h2>
+      <div class="logout-confirm-actions">
+        <button type="button" data-logout-cancel>Отмена</button
+        ><button type="button" data-logout-confirm>Выйти</button>
+      </div>
+    </section>
+  </div>
+</div>

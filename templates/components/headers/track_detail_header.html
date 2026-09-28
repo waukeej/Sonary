@@ -1,0 +1,31 @@
+<section
+  class="track-detail-hero"
+  data-loading-hero
+  aria-labelledby="trackDetailTitle"
+>
+  <div class="detail-cover-frame">
+    <img
+      class="track-detail-cover"
+      src="{{ track.cover if track else url_for('static', filename='images/sonary-logo.jpg') }}"
+      alt="Обложка трека"
+    />
+  </div>
+  <div class="track-detail-info">
+    <p class="track-album" data-no-i18n>{{ track.author }}</p>
+    <h1 id="trackDetailTitle" data-no-i18n>
+      {{ track.title if track else 'Название трека' }}
+    </h1>
+    <p class="track-detail-artist" data-no-i18n>
+      {{ track.artist if track else 'Исполнитель' }}
+    </p>
+    <p class="track-detail-summary" data-no-i18n>
+      {{ track.summary if track else 'Краткое описание' }}
+    </p>
+    <div class="track-detail-badges">
+      <span>{{ track.rating if track else '—' }}</span
+      ><span>{{ track.date if track else '—' }}</span
+      ><span>{{ track.time if track else '—' }}</span
+      ><span>{{ track.mood if track else '—' }}</span>
+    </div>
+  </div>
+</section>

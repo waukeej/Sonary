@@ -1,0 +1,17 @@
+{% from 'components/cards/queue_item.html' import queue_item %}
+<template id="queueTrackTemplate"
+  >{{ queue_item({'title':'', 'artist':'', 'cover':url_for('static', filename='images/sonary-logo.jpg')}) }}</template
+>
+<aside class="sonary-queue-panel" id="sonaryQueuePanel" hidden>
+  <div class="sonary-queue-surface">
+    <div class="sonary-queue-head">
+      <span>Очередь</span
+      ><button type="button" id="closeSonaryQueue" aria-label="Закрыть">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="sonary-queue-list">
+      {% for track in queue_tracks|default([]) %}{{ queue_item(track) }}{% endfor %}
+    </div>
+  </div>
+</aside>

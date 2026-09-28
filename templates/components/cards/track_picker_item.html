@@ -1,0 +1,4 @@
+{% macro track_picker_item(track) -%}
+  {% from 'components/cards/profile_track_card.html' import profile_track_card %}
+  {{ profile_track_card(track, context='picker') }}
+{%- endmacro %}

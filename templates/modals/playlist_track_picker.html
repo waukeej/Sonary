@@ -1,0 +1,32 @@
+{% from 'components/cards/track_picker_item.html' import track_picker_item %}
+<div class="playlist-track-picker" id="playlistTrackPicker" hidden>
+  <section class="playlist-track-picker-window" role="dialog" aria-modal="true">
+    <header class="playlist-track-picker-head">
+      <strong>Добавить треки</strong
+      ><button
+        class="playlist-track-picker-close"
+        type="button"
+        aria-label="Закрыть"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </header>
+    <div class="playlist-track-picker-list">
+      {% for track in available_tracks|default([]) %}{{ track_picker_item(track) }}{% else %}<p
+        class="playlist-track-picker-empty"
+      >
+        Нет доступных треков
+      </p>{% endfor %}
+    </div>
+    <footer class="playlist-track-picker-footer">
+      <button class="playlist-track-picker-cancel" type="button">Отмена</button
+      ><button
+        class="playlist-track-picker-add"
+        type="button"
+        {% if not available_tracks|default([]) %}disabled{% endif %}
+      >
+        Добавить
+      </button>
+    </footer>
+  </section>
+</div>

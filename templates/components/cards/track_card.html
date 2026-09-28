@@ -1,0 +1,55 @@
+{% macro track_card(track) -%}
+  <article
+    class="track-card"
+    data-track-id="{{ track.id }}"
+    data-href="{{ track.detail_url }}"
+    data-audio-url="{{ track.audio_url }}"
+  >
+    <div class="track-card-top">
+      <img
+        class="track-cover"
+        src="{{ track.cover }}"
+        alt="Обложка {{ track.title }}"
+      />
+      <div class="track-info">
+        <div class="track-title">{{ track.title }}</div>
+        <div class="track-artist">{{ track.artist }}</div>
+      </div>
+      <div class="track-description" data-no-i18n>{{ track.description }}</div>
+      <div class="track-meta-badges">
+        <div class="badge">{{ track.date }}</div>
+        <div class="badge">{{ track.time }}</div>
+        <div class="badge">{{ track.mood }}</div>
+        <div class="badge">{{ track.rating }}/10</div>
+      </div>
+    </div>
+    <div class="track-card-bottom">
+      <span class="time-stamp">0:00</span
+      ><input
+        class="card-progress-container track-progress-slider"
+        type="range"
+        min="0"
+        max="100"
+        value="0"
+        step="1"
+        data-duration="{{ track.duration_seconds }}"
+        aria-label="Позиция трека"
+      /><span class="time-stamp">−{{ track.duration }}</span>
+      <div class="card-controls">
+        <button class="card-play-btn" type="button" aria-label="Воспроизвести">
+          <i class="bi bi-play-fill"></i></button
+        ><button class="card-like-btn" type="button" aria-label="Нравится">
+          <i class="bi bi-heart"></i></button
+        ><button
+          class="card-menu-btn"
+          type="button"
+          aria-label="Добавить в плейлист"
+        >
+          <i class="bi bi-plus-lg"></i></button
+        ><button type="button" aria-label="Добавить в очередь">
+          <i class="bi bi-music-note-list"></i>
+        </button>
+      </div>
+    </div>
+  </article>
+{%- endmacro %}

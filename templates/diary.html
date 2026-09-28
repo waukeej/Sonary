@@ -1,0 +1,72 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Дневник — Sonary{% endblock %}
+{% block content %}
+  {% from 'components/cards/track_card.html' import track_card %}
+  {% set diary_tracks = tracks|default([]) %}
+  <main class="content diary-page">
+    {% include 'components/filters/diary_filters.html' %}
+    {% if filter_errors %}<p class="profile-field-error" role="alert">
+      {% for error in filter_errors.values() %}{{ error }}{% endfor %}
+    </p>{% endif %}
+    <section class="diary-action-row" aria-label="Действия дневника">
+      <button
+        class="diary-action-card create-entry-card create-track-card"
+        type="button"
+        aria-label="Создать трек"
+        data-create-track-card
+      >
+        <div class="create-entry-art" aria-hidden="true">
+          <i class="bi bi-plus-lg"></i>
+        </div>
+        <div class="create-entry-copy">
+          <h2>Создать</h2>
+          <p>Новый трек</p>
+        </div>
+      </button>
+      <button
+        class="diary-action-card create-entry-card create-track-card delete-entry-card"
+        type="button"
+        aria-label="Удалить треки"
+        data-delete-track-action
+        {% if not diary_tracks %}disabled{% endif %}
+      >
+        <div class="create-entry-art" aria-hidden="true">
+          <i class="bi bi-dash-lg"></i>
+        </div>
+        <div class="create-entry-copy">
+          <h2>Удалить</h2>
+          <p>Удалить треки</p>
+        </div>
+      </button>
+    </section>
+    {% if not diary_tracks %}<p class="diary-empty-results">
+      Нет подходящих треков
+    </p>{% endif %}
+    <section class="diary-track-list" id="diaryTrackList">
+      {% for track in diary_tracks %}{{ track_card(track) }}{% endfor %}
+    </section>
+  </main>
+{% endblock %}
+{% block page_modals %}{% include 'modals/track_creation.html' %}{% endblock %}
+{% block scripts %}
+  <script
+    src="{{ url_for('static', filename='js/filters.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/view-toggle.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/creation-modal.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/track-navigation.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/delete-mode.js') }}"
+    defer
+  ></script>
+{% endblock %}

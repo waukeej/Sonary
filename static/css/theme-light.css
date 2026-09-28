@@ -1,0 +1,314 @@
+html[data-theme="light"] {
+  color-scheme: light;
+  --theme-background: #f7f7f8;
+  --theme-surface: #ffffff;
+  --theme-surface-muted: #f0f1f3;
+  --theme-inactive: #f0f1f3;
+  --theme-accent: #d35400;
+  --theme-text: #202124;
+  --theme-text-muted: #5f6368;
+  --theme-border: #c5c8ce;
+  --radius-surface: 18px;
+  --radius-card: 14px;
+  --radius-control: 9px;
+  --radius-icon: 10px;
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --space-5: 28px;
+  --surface-border: color-mix(in srgb, var(--theme-border) 55%, transparent);
+  --control-border: color-mix(in srgb, var(--theme-border) 72%, transparent);
+  --sonary-window-surface: rgb(255 255 255 / 94%);
+}
+
+html[data-theme="light"] body,
+html[data-theme="light"] .content,
+html[data-theme="light"] .filter-area,
+html[data-theme="light"] .main-container,
+html[data-theme="light"] .content-wrapper {
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+}
+
+html[data-theme="light"]
+  :is(
+    .header,
+    .sidebar,
+    .player-bar,
+    .track-card,
+    .settings-window,
+    .creation-window,
+    .playlist-track-picker-window,
+    .sonary-queue-surface,
+    .profile-dropdown,
+    .date-range-popover,
+    .calendar-period-popover,
+    .queue-action-menu,
+    .add-playlist-menu,
+    .track-more-menu,
+    .playlist-more-menu,
+    .profile-playlist,
+    .create-entry-card,
+    .track-detail-panel,
+    .track-detail-card,
+    .settings-nav,
+    .track-description,
+    .diary-card,
+    .playlist-card,
+    .calendar-day-card,
+    .profile-hero,
+    .profile-section,
+    .activity-heatmap,
+    .track-card-content
+  ) {
+  background-color: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+  border-color: var(--control-border) !important;
+}
+
+html[data-theme="light"]
+  :is(
+    .settings-window,
+    .creation-window,
+    .playlist-track-picker-window,
+    .sonary-queue-panel.is-modal .sonary-queue-surface,
+    .auth-modal .settings-window,
+    .logout-confirm-modal .settings-window
+  ) {
+  background: rgb(255 255 255 / 94%) !important;
+}
+
+html[data-theme="light"]
+  :is(
+    button,
+    .filter-field select,
+    .badge,
+    .settings-panel input,
+    .settings-panel select,
+    input,
+    select,
+    textarea,
+    .date-range-popover input,
+    .creation-body input
+  ) {
+  background-color: var(--theme-surface-muted);
+  color: var(--theme-text);
+  border-color: var(--control-border);
+}
+
+html[data-theme="light"]
+  :is(
+    button:hover,
+    .filter-field select:hover,
+    .settings-tab:hover,
+    .settings-tab.active,
+    .profile-dropdown :is(a, button):hover
+  ) {
+  background-color: #e5e7eb;
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] :is(.settings-nav, .sidebar) {
+  background-color: var(--theme-surface-muted) !important;
+}
+html[data-theme="light"]
+  :is(.settings-modal, .modal-backdrop, .sonary-queue-panel.is-modal) {
+  background-color: rgb(44 37 32 / 28%);
+}
+html[data-theme="light"]
+  :is(
+    .settings-panel label,
+    .settings-nav h3,
+    .track-artist,
+    .player-text .artist,
+    .time-stamp,
+    .profile-username,
+    .track-description,
+    .track-detail-summary,
+    .track-long-text p,
+    .profile-playlist p
+  ) {
+  color: var(--theme-text-muted) !important;
+}
+html[data-theme="light"]
+  :is(
+    .settings-footer button,
+    .player-icon-btn.main-play,
+    .filter-form-actions button:first-child
+  ) {
+  background: var(--theme-accent);
+  color: #fff;
+  border-color: var(--theme-accent);
+}
+html[data-theme="light"]
+  :is(.progress-container, .card-progress-container, .track-description) {
+  background-color: #e5e7eb;
+  border-color: var(--theme-border);
+}
+html[data-theme="light"] :is(.welcome-page, .not-found-page, .welcome-intro) {
+  background: radial-gradient(
+    circle at 20% 20%,
+    #e5e7eb 0,
+    #fafafa 55%,
+    #f0f1f3 100%
+  );
+  color: var(--theme-text);
+}
+html[data-theme="light"] .welcome-card,
+html[data-theme="light"] .welcome-footer,
+html[data-theme="light"] .welcome-modal-card {
+  background: rgb(255 255 255 / 94%);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+}
+html[data-theme="light"] .welcome-copy,
+html[data-theme="light"] .welcome-modal-card label,
+html[data-theme="light"] .welcome-modal-card h2,
+html[data-theme="light"] .welcome-article,
+html[data-theme="light"] .welcome-article p,
+html[data-theme="light"] .welcome-article h2,
+html[data-theme="light"] .welcome-article h3,
+html[data-theme="light"] .welcome-article b,
+html[data-theme="light"] .registration-agreement,
+html[data-theme="light"] .agreement-intro h2,
+html[data-theme="light"] .agreement-intro p,
+html[data-theme="light"] .agreement-consent {
+  color: var(--theme-text);
+}
+html[data-theme="light"] .welcome-modal-card input {
+  background: var(--theme-surface-muted);
+  color: var(--theme-text);
+  border-color: var(--control-border);
+}
+html[data-theme="light"] .welcome-close {
+  color: var(--theme-text);
+  border-color: var(--theme-accent);
+}
+html[data-theme="light"] .welcome-footer a {
+  color: var(--theme-accent);
+}
+html[data-theme="light"] .welcome-form .welcome-field-error {
+  color: #b3261e;
+}
+html[data-theme="light"] .ui-notice--error {
+  color: #b3261e;
+  border-color: #b3261e;
+}
+html[data-theme="light"] .profile-field-error {
+  color: #b3261e;
+}
+html[data-theme="light"] .welcome-article h3,
+html[data-theme="light"] .welcome-article b,
+html[data-theme="light"] .agreement-item summary b,
+html[data-theme="light"] .agreement-consent a {
+  color: var(--theme-accent);
+}
+html[data-theme="light"]
+  :is(.agreement-item, .agreement-consents, .agreement-signature) {
+  background: rgb(255 255 255 / 86%);
+  border-color: var(--control-border);
+}
+html[data-theme="light"] .agreement-consent {
+  background: var(--theme-surface-muted);
+}
+html[data-theme="light"] .member-card-main,
+html[data-theme="light"] .member-card-brand,
+html[data-theme="light"] .member-card-service-row,
+html[data-theme="light"] .sonary-member-card {
+  background-color: var(--theme-surface);
+  color: var(--theme-text);
+}
+html[data-theme="light"] .member-card-service-row span,
+html[data-theme="light"] .member-credential > span {
+  color: var(--theme-text-muted);
+}
+html[data-theme="light"] .member-photo-placeholder {
+  background: linear-gradient(145deg, #f0f1f3, #fff);
+}
+html[data-theme="light"] .media-crop-stage {
+  background: var(--theme-surface-muted);
+}
+html[data-theme="light"]
+  :is(.create-entry-art, .playlist-art.create-entry-art) {
+  background: var(--theme-surface-muted) !important;
+  color: var(--theme-text);
+}
+html[data-theme="light"]
+  :is(.settings-modal, .sonary-queue-panel.is-modal, .welcome-modal) {
+  backdrop-filter: blur(8px);
+}
+
+html[data-theme="light"] .welcome-form :is(h2, label, input),
+html[data-theme="light"]
+  :is(
+    .welcome-back,
+    .welcome-intro span,
+    .agreement-header button,
+    .agreement-intro strong
+  ) {
+  color: var(--theme-text);
+}
+html[data-theme="light"] .welcome-form > p:not(.welcome-eyebrow),
+html[data-theme="light"]
+  :is(
+    .agreement-item p,
+    .agreement-divider,
+    .agreement-consent small,
+    .agreement-signature small,
+    .agreement-footer p,
+    .agreement-footer > div span
+  ) {
+  color: var(--theme-text-muted);
+}
+html[data-theme="light"] .welcome-form input {
+  background: var(--theme-surface);
+  border-color: var(--theme-border);
+}
+html[data-theme="light"] .welcome-form input[aria-invalid="true"] {
+  border-color: #b3261e;
+}
+html[data-theme="light"] :is(.welcome-eyebrow, .welcome-footer button) {
+  color: var(--theme-accent);
+}
+html[data-theme="light"] .welcome-article-toolbar {
+  background: var(--theme-surface);
+}
+html[data-theme="light"] body.is-agreement-flow .welcome-page {
+  background: var(--theme-background);
+}
+html[data-theme="light"] .agreement-footer button:disabled {
+  background: var(--theme-inactive);
+  color: var(--theme-text-muted);
+  border-color: var(--theme-border);
+}
+html[data-theme="light"]
+  :is(
+    .filter-field select,
+    .filter-field select option,
+    .creation-body input[list]
+  ) {
+  color-scheme: light;
+}
+html[data-theme="light"]
+  :is(.creation-modal, .playlist-track-picker, .sonary-queue-panel.is-modal) {
+  background: rgb(32 33 36 / 28%) !important;
+}
+html[data-theme="light"] .sonary-queue-panel.is-modal.is-closing {
+  background: transparent !important;
+}
+html[data-theme="light"] .settings-account-actions .settings-danger {
+  color: #b3261e !important;
+}
+html[data-theme="light"]
+  :is(
+    .settings-account-row input,
+    .auth-field input,
+    .creation-body input,
+    .creation-body textarea,
+    .creation-body select
+  ) {
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+}

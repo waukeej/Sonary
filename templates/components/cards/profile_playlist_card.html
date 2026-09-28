@@ -1,0 +1,28 @@
+{% macro profile_playlist_card(playlist, hidden=false) -%}
+  <article
+    class="profile-playlist"
+    data-href="{{ playlist.detail_url }}"
+    data-playlist-id="{{ playlist.id }}"
+    {% if hidden %}hidden{% endif %}
+  >
+    <div
+      class="profile-playlist-cover"
+      role="button"
+      tabindex="0"
+      aria-pressed="false"
+      aria-label="Воспроизвести {{ playlist.title }}"
+    >
+      <img src="{{ playlist.cover }}" alt="Обложка {{ playlist.title }}" /><i
+        class="bi bi-play-fill"
+        aria-hidden="true"
+      ></i>
+    </div>
+    <section>
+      <h3 {% if not playlist.system_key %}data-no-i18n{% endif %}>
+        {{ playlist.title }}
+      </h3>
+      <p data-no-i18n>{{ playlist.description }}</p>
+      <span>{{ playlist.track_count }} <span>треков</span></span>
+    </section>
+  </article>
+{%- endmacro %}

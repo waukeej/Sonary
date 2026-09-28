@@ -1,0 +1,7 @@
+{% for language in ('ru', 'en') %}
+  <link
+    rel="localization"
+    hreflang="{{ language }}"
+    href="{{ url_for('static', filename='localaise-' ~ language ~ '.json') }}"
+  />
+{% endfor %}

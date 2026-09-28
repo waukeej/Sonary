@@ -1,0 +1,90 @@
+<div class="creation-modal" id="playlistCreationModal" hidden>
+  <form
+    class="creation-window"
+    id="playlistCreationForm"
+    method="post"
+    action="{{ url_for('playlists.edit',playlist_id=playlist.id) if playlist_errors and playlist else url_for('playlists.create') }}"
+    enctype="multipart/form-data"
+    data-playlist-form
+    novalidate
+  >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <div class="creation-header">
+      <div>
+        <p class="creation-eyebrow">Плейлисты</p>
+        <h2>Новый плейлист</h2>
+      </div>
+      <button
+        class="creation-close"
+        type="button"
+        data-close-creation
+        aria-label="Закрыть"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    {% set draft = form_values|default({}) %}
+    <div class="creation-body">
+      {% for name, message in (playlist_errors|default({})).items() %}<p
+        class="auth-error"
+        data-track-error="{{ name }}"
+      >
+        {{ message }}
+      </p>{% endfor %}
+      <p class="auth-error" data-track-error="form" hidden></p>
+      <label class="upload-field"
+        >Обложка плейлиста
+        <input
+          type="file"
+          name="playlistCover"
+          accept="image/png,image/jpeg,image/webp"
+          data-media-crop="cover" /><span>Выберите изображение</span
+        ><img
+          class="upload-field-preview"
+          data-media-preview="playlistCover"
+          alt="Предпросмотр обложки"
+          hidden
+      /></label>
+      <label
+        >Название
+        <input
+          type="text"
+          name="playlistTitle"
+          required
+          maxlength="255"
+          placeholder="Название плейлиста"
+          value="{{ draft.get('playlistTitle','') }}"
+      /></label>
+      <label
+        >Короткое описание
+        <textarea name="playlistDescription" rows="4" placeholder="До 50 слов">
+{{ draft.get('playlistDescription','') }}</textarea
+        ><span class="field-hint">Не более 50 слов</span></label
+      >
+      <label
+        >Приватность плейлистов
+        <select name="privacy">
+          <option value="private">Только мне</option>
+          <option
+            value="public"
+            {% if draft.get('privacy', 'private') == 'public' %}selected{% endif %}
+          >
+            Всем пользователям
+          </option>
+        </select></label
+      >
+      <button
+        class="add-tracks-placeholder"
+        type="button"
+        data-create-pick-tracks
+      >
+        <i class="bi bi-plus-lg"></i> Добавить треки
+      </button>
+    </div>
+    <div class="creation-footer">
+      <button class="settings-secondary" type="button" data-close-creation>
+        Отмена</button
+      ><button class="creation-submit" type="submit">Создать</button>
+    </div>
+  </form>
+</div>

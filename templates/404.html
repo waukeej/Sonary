@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    {% include 'components/localization_assets.html' %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ error_message|default('Страница не найдена') }} — Sonary</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/welcome.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/not-found.css') }}"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/welcome-background.js') }}"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/theme-light.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/preferences.js') }}"></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='js/localization.js') }}"
+    ></script>
+  </head>
+  <body class="not-found-body">
+    <main class="welcome-page">
+      <section class="welcome-card not-found-card">
+        <div class="welcome-mark" aria-hidden="true">?</div>
+        <p class="welcome-eyebrow">ОШИБКА {{ error_code|default(404) }}</p>
+        <h1>{{ error_message|default('Эта страница не нашлась') }}</h1>
+        <p class="welcome-copy">
+          Возможно, ссылка устарела или такой страницы ещё нет. Вернитесь на
+          главную и продолжите свою историю музыки.
+        </p>
+        <a class="not-found-action" href="/">На главную</a>
+      </section>
+      <nav class="welcome-footer" aria-label="Дополнительная информация">
+        <a href="/?page=about">О нас</a>
+        <a href="/?page=tos">TOS</a>
+        <a href="/?page=faq">FAQ</a>
+      </nav>
+    </main>
+  </body>
+</html>

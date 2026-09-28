@@ -1,0 +1,134 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Календарь — Sonary{% endblock %}
+{% block head %}<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/calendar.css') }}"
+/>{% endblock %}
+{% block content %}
+  <main class="content calendar-page">
+    <section class="calendar-panel" aria-labelledby="calendarTitle">
+      <div class="calendar-controls">
+        <button
+          class="calendar-nav-btn"
+          id="calendarPrevious"
+          type="button"
+          title="Предыдущий месяц"
+          aria-label="Предыдущий месяц"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <div class="calendar-period-control">
+          <button
+            class="calendar-period-toggle"
+            id="calendarPeriodToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="calendarPeriodPopover"
+          >
+            <span id="calendarPeriodLabel"></span
+            ><i class="bi bi-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div
+            class="calendar-period-popover"
+            id="calendarPeriodPopover"
+            hidden
+          >
+            <button
+              class="calendar-period-year"
+              id="calendarYearSwitch"
+              type="button"
+            ></button>
+            <div class="calendar-period-grid" id="calendarPeriodGrid"></div>
+          </div>
+        </div>
+        <button
+          class="calendar-nav-btn"
+          id="calendarNext"
+          type="button"
+          title="Следующий месяц"
+          aria-label="Следующий месяц"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+      <div class="calendar-heading">
+        <div>
+          <p class="calendar-eyebrow">Дневник</p>
+          <h1 id="calendarTitle">
+            <i class="bi bi-calendar3" aria-hidden="true"></i> Календарь записей
+          </h1>
+        </div>
+        <p id="calendarMonthSummary" class="calendar-summary"></p>
+      </div>
+      <div class="calendar-grid-stage">
+        <button
+          class="calendar-grid-nav calendar-grid-nav-prev"
+          id="calendarGridPrevious"
+          type="button"
+          title="Предыдущий месяц"
+          aria-label="Предыдущий месяц"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <div class="calendar-scroll">
+          <div class="calendar-grid" id="calendarGrid" aria-live="polite"></div>
+        </div>
+        <button
+          class="calendar-grid-nav calendar-grid-nav-next"
+          id="calendarGridNext"
+          type="button"
+          title="Следующий месяц"
+          aria-label="Следующий месяц"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+  </main>
+{% endblock %}
+{% block page_modals %}
+  {% from 'components/cards/track_card.html' import track_card %}
+  <template id="calendarCardTemplates"
+    >{% for track in calendar_tracks %}{{ track_card(track) }}{% endfor %}</template
+  >
+  <div
+    class="creation-modal calendar-records-modal"
+    id="calendarRecordsModal"
+    hidden
+  >
+    <section
+      class="creation-window calendar-records-window"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="calendarRecordsTitle"
+    >
+      <div class="creation-header">
+        <div>
+          <p class="creation-eyebrow">Дневник</p>
+          <h2 id="calendarRecordsTitle">Записи за день</h2>
+        </div>
+        <button
+          class="creation-close"
+          id="calendarRecordsClose"
+          type="button"
+          title="Закрыть"
+          aria-label="Закрыть"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div
+        class="creation-body calendar-records-body"
+        id="calendarRecordsList"
+      ></div>
+    </section>
+  </div>
+{% endblock %}
+{% block scripts %}<script
+  src="{{ url_for('static', filename='js/track-navigation.js') }}"
+  defer
+></script>
+<script
+  src="{{ url_for('static', filename='js/calendar-page.js') }}"
+  defer
+></script>{% endblock %}

@@ -1,0 +1,4 @@
+{% macro playlist_track_row(track) -%}
+  {% from 'components/cards/profile_track_card.html' import profile_track_card %}
+  {{ profile_track_card(track, context='playlist') }}
+{%- endmacro %}

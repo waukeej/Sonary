@@ -1,0 +1,37 @@
+<header class="header">
+  <div class="logo-container"><a href="/diary">Sonary</a></div>
+  <div class="profile-menu-wrapper">
+    <button
+      class="profile-avatar-btn"
+      id="profileAvatarBtn"
+      type="button"
+      aria-label="Открыть меню профиля"
+      aria-expanded="false"
+    >
+      <img
+        class="profile-avatar-image"
+        data-profile-avatar
+        data-avatar-seed="{{ account.id }}"
+        data-avatar-custom="{{ 'true' if account.avatar_url else 'false' }}"
+        src="{{ account.avatar_url or url_for('static', filename='images/avatars/avatar-1.png') }}"
+        alt="Аватарка"
+      />
+    </button>
+    <div class="profile-dropdown" id="profileDropdown" hidden>
+      {% if is_member|default(true) %}
+        <a href="/profile"><i class="bi bi-person"></i><span>Профиль</span></a>
+        <div class="profile-dropdown-divider"></div>
+        <a class="profile-logout" href="#"
+          ><i class="bi bi-box-arrow-right"></i><span>Выйти</span></a
+        >
+      {% else %}
+        <button type="button" class="profile-auth-action" data-auth="login">
+          <i class="bi bi-box-arrow-in-right"></i><span>Войти</span>
+        </button>
+        <button type="button" class="profile-auth-action" data-auth="register">
+          <i class="bi bi-person-plus"></i><span>Зарегистрироваться</span>
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</header>

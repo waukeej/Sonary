@@ -1,0 +1,116 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Профиль — Sonary{% endblock %}
+{% block head %}<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/activity-heatmap.css') }}"
+/><link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/member-card.css') }}"
+/>{% endblock %}
+{% block body_attrs %}data-loading-items{% endblock %}
+{% block content %}
+  {% from 'components/cards/profile_track_card.html' import profile_track_card %}
+  {% from 'components/cards/profile_playlist_card.html' import profile_playlist_card %}
+  {% set tracks = profile_tracks|default([]) %}
+  {% set playlists = profile_playlists|default([]) %}
+  <main class="content profile-page">
+    {% include 'components/headers/profile_header.html' %}
+    <section class="profile-activity" aria-labelledby="profileActivityTitle">
+      <div class="profile-section-title profile-activity-title">
+        <h2 id="profileActivityTitle">Активность</h2>
+        <span>Последние 365 дней</span>
+      </div>
+      <div
+        class="profile-heatmap-scroll"
+        tabindex="0"
+        aria-label="Тепловая карта активности за последние 365 дней"
+      >
+        <div class="profile-heatmap-canvas" id="profileHeatmap"></div>
+      </div>
+      <div class="profile-heatmap-legend" aria-label="Уровни активности">
+        <span>Меньше</span><i data-level="0"></i><i data-level="1"></i
+        ><i data-level="2"></i><i data-level="3"></i><i data-level="4"></i
+        ><span>Больше</span>
+      </div>
+    </section>
+    <div class="profile-load-region">
+      <section class="profile-section">
+        <div class="profile-section-title">
+          <h2>Треки</h2>
+          <span>Все треки</span>
+        </div>
+        <div id="profileTracks" class="profile-track-list">
+          {% if tracks %}{% for track in tracks %}{{ profile_track_card(track, hidden=loop.index > 5) }}{% endfor %}{% else %}{% include 'components/cards/empty_profile_tracks.html' %}{% endif %}
+        </div>
+        {% if tracks|length > 5 %}<div
+          class="profile-more-actions"
+          data-profile-pagination="tracks"
+        >
+          <button id="moreTracks" class="profile-show-more" type="button">
+            <i class="bi bi-plus-lg"></i> Показать ещё</button
+          ><button
+            class="profile-show-more profile-collapse"
+            type="button"
+            hidden
+          >
+            <i class="bi bi-chevron-up"></i> Скрыть
+          </button>
+        </div>{% endif %}
+      </section>
+      <section class="profile-section">
+        <div class="profile-section-title">
+          <h2>Плейлисты</h2>
+          <span>Все плейлисты</span>
+        </div>
+        <div id="profilePlaylists" class="profile-playlist-list">
+          {% if playlists %}{% for playlist in playlists %}{{ profile_playlist_card(playlist, hidden=loop.index > 5) }}{% endfor %}{% else %}{% include 'components/cards/empty_profile_playlists.html' %}{% endif %}
+        </div>
+        {% if playlists|length > 5 %}<div
+          class="profile-more-actions"
+          data-profile-pagination="playlists"
+        >
+          <button id="morePlaylists" class="profile-show-more" type="button">
+            <i class="bi bi-plus-lg"></i> Показать ещё</button
+          ><button
+            class="profile-show-more profile-collapse"
+            type="button"
+            hidden
+          >
+            <i class="bi bi-chevron-up"></i> Скрыть
+          </button>
+        </div>{% endif %}
+      </section>
+    </div>
+  </main>
+{% endblock %}
+{% block page_modals %}{% include 'modals/profile_edit.html' %}{% include 'modals/track_creation.html' %}{% endblock %}
+{% block scripts %}
+  <script
+    src="{{ url_for('static', filename='js/profile-page.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/profile-heatmap.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/profile-settings.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/creation-modal.js') }}"
+    defer
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"
+    defer
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/member-card.js') }}"
+    defer
+  ></script>
+{% endblock %}

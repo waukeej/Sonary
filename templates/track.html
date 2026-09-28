@@ -1,0 +1,83 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Трек — Sonary{% endblock %}
+{% block content %}
+  <main
+    class="content track-detail-page"
+    data-track-id="{{ track.id }}"
+    data-audio-url="{{ track.audio_url }}"
+    data-delete-url="{{ url_for('diary.delete', track_id=track.id) }}"
+  >
+    {% include 'components/headers/track_detail_header.html' %}
+    <section class="track-detail-actions">
+      <div>
+        <button
+          class="listen-playlist-btn"
+          type="button"
+          title="Слушать"
+          aria-label="Слушать"
+        >
+          <i class="bi bi-play-fill"></i></button
+        ><button
+          class="track-queue-btn"
+          type="button"
+          title="Добавить в очередь"
+          aria-label="Добавить в очередь"
+        >
+          <i class="bi bi-music-note-list"></i>
+        </button>
+      </div>
+      {% if can_edit %}<div class="track-right-actions">
+        <button
+          class="track-edit-btn"
+          type="button"
+          title="Изменить отзыв"
+          aria-label="Изменить отзыв"
+        >
+          <i class="bi bi-pencil"></i>
+        </button>
+        <div class="track-more-wrap">
+          <button
+            class="track-more-btn"
+            id="trackMoreBtn"
+            type="button"
+            aria-label="Дополнительные действия"
+            aria-expanded="false"
+          >
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="track-more-menu" id="trackMoreMenu" hidden>
+            <label class="track-private-toggle"
+              ><i class="bi bi-eye-slash"></i><span>Приватный отзыв</span
+              ><input
+                type="checkbox"
+                role="switch"
+                aria-label="Приватный отзыв"
+                {% if track.privacy == 'private' %}checked{% endif %} /></label
+            ><button type="button">
+              <i class="bi bi-share"></i><span>Поделиться</span></button
+            ><button type="button">
+              <i class="bi bi-trash3"></i><span>Удалить отзыв</span>
+            </button>
+          </div>
+        </div>
+      </div>{% endif %}
+    </section>
+    <article class="track-long-text" data-loading-target>
+      <h2>О треке</h2>
+      <p data-no-i18n style="white-space:pre-wrap">
+        {{ track.full_description }}
+      </p>
+    </article>
+  </main>
+{% endblock %}
+{% block page_modals %}{% if can_edit %}{% include 'modals/review_edit.html' %}{% endif %}{% endblock %}
+{% block scripts %}
+  <script
+    src="{{ url_for('static', filename='js/track-more-menu.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/track-review-modal.js') }}"
+    defer
+  ></script>
+{% endblock %}

@@ -1,0 +1,40 @@
+<section
+  class="profile-hero"
+  data-loading-hero
+  role="button"
+  tabindex="0"
+  aria-label="Открыть профиль пользователя"
+>
+  <div class="profile-page-avatar">
+    <img
+      class="profile-avatar-image"
+      data-profile-avatar
+      data-avatar-seed="{{ profile.id if profile and profile.id else '10012030' }}"
+      data-avatar-custom="{{ 'true' if profile and profile.avatar_url else 'false' }}"
+      src="{{ profile.avatar_url if profile and profile.avatar_url else url_for('static', filename='images/avatars/avatar-1.png') }}"
+      alt="Аватарка пользователя"
+    />
+  </div>
+  <div class="profile-hero-info">
+    <p class="profile-eyebrow">Пользователь {{ profile.id }}</p>
+    <h1 data-profile-field="name" data-no-i18n>
+      {{ profile.name if profile else 'Имя пользователя' }}
+    </h1>
+    <p class="profile-username" data-profile-username data-no-i18n>
+      @{{ profile.username if profile and profile.username else 'username' }}
+    </p>
+    <p data-profile-field="bio" data-no-i18n>
+      {{ profile.bio if profile else 'О себе' }}
+    </p>
+    <p class="profile-location">
+      <i class="bi bi-geo-alt"></i>
+      <span data-profile-field="city" data-no-i18n>{{ profile.city }}</span>
+    </p>
+    <div class="profile-counts">
+      <span><b>{{ profile.track_count if profile else 0 }}</b> треков</span
+      ><span
+        ><b>{{ profile.playlist_count if profile else 0 }}</b> плейлистов</span
+      >
+    </div>
+  </div>
+</section>

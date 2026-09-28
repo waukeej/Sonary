@@ -1,0 +1,33 @@
+<section
+  class="playlist-hero track-detail-hero"
+  data-loading-hero
+  aria-labelledby="playlistTitle"
+>
+  <div class="detail-cover-frame">
+    <img
+      class="track-detail-cover"
+      src="{{ playlist.cover if playlist else url_for('static', filename='images/sonary-logo.jpg') }}"
+      alt="Обложка плейлиста"
+    />
+  </div>
+  <div class="track-detail-info">
+    <p class="track-album">Плейлист</p>
+    <h1
+      id="playlistTitle"
+      {% if not playlist.system_key %}data-no-i18n{% endif %}
+    >
+      {{ playlist.title if playlist else 'Название плейлиста' }}
+    </h1>
+    <p class="track-detail-artist" data-no-i18n>
+      {{ playlist.author if playlist else 'Автор' }}
+    </p>
+    <p class="track-detail-summary" data-no-i18n>
+      {{ playlist.description if playlist else 'Краткое описание' }}
+    </p>
+    <div class="track-detail-badges">
+      <span>{{ playlist.date if playlist else '—' }}</span
+      ><span>{{ playlist.time if playlist else '—' }}</span
+      ><span>{{ playlist.track_count if playlist else 0 }} треков</span>
+    </div>
+  </div>
+</section>

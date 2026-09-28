@@ -1,0 +1,46 @@
+<aside class="sidebar collapsed" id="sidebar">
+  <div class="sidebar-top">
+    <button
+      class="menu-btn"
+      id="toggleMenuBtn"
+      type="button"
+      title="Переключить меню"
+    >
+      <span class="icon"><i class="bi bi-menu-app"></i></span
+      ><span class="text">закрыть меню</span>
+    </button>
+    <button
+      id="diaryNavBtn"
+      type="button"
+      title="Дневник"
+      onclick="window.SonaryNavigation.go('/diary')"
+    >
+      <span class="icon"><i class="bi bi-book"></i></span
+      ><span class="text">дневник</span>
+    </button>
+    <button
+      id="calendarNavBtn"
+      type="button"
+      title="Календарь"
+      onclick="window.SonaryNavigation.go('/calendar')"
+    >
+      <span class="icon"><i class="bi bi-calendar3"></i></span
+      ><span class="text">календарь</span>
+    </button>
+    <button
+      id="playlistsNavBtn"
+      type="button"
+      title="Плейлисты"
+      onclick="window.SonaryNavigation.go('/playlists')"
+    >
+      <span class="icon"><i class="bi bi-collection-play"></i></span
+      ><span class="text">плейлисты</span>
+    </button>
+  </div>
+  <div class="sidebar-bottom">
+    <button id="openSettingsBtn" type="button" title="Настройки">
+      <span class="icon"><i class="bi bi-gear"></i></span
+      ><span class="text">настройки</span>
+    </button>
+  </div>
+</aside>

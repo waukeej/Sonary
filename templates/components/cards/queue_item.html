@@ -1,0 +1,4 @@
+{% from 'components/cards/profile_track_card.html' import profile_track_card %}
+{% macro queue_item(track) -%}
+  {{ profile_track_card(track, context='queue') }}
+{%- endmacro %}

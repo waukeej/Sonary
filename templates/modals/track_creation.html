@@ -1,0 +1,34 @@
+<div class="creation-modal" id="trackCreationModal" hidden>
+  <form
+    class="creation-window"
+    id="trackCreationForm"
+    method="post"
+    action="{{ url_for('diary.create') }}"
+    enctype="multipart/form-data"
+    data-diary-form
+    novalidate
+  >
+    <div class="creation-header">
+      <div>
+        <p class="creation-eyebrow">Дневник</p>
+        <h2>Новый трек</h2>
+      </div>
+      <button
+        class="creation-close"
+        type="button"
+        data-close-creation
+        aria-label="Закрыть"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="creation-body">
+      {% set editing = false %}{% include 'components/track_fields.html' %}
+    </div>
+    <div class="creation-footer">
+      <button class="settings-secondary" type="button" data-close-creation>
+        Отмена</button
+      ><button class="creation-submit" type="submit">Создать</button>
+    </div>
+  </form>
+</div>

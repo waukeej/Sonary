@@ -1,0 +1,22 @@
+.not-found-card {
+  min-height: 424px;
+}
+
+.not-found-action {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid #ff9f43;
+  border-radius: 8px;
+  background: #ff9f43;
+  color: #21160f;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.not-found-action:hover {
+  filter: brightness(1.06);
+}

@@ -1,0 +1,1159 @@
+  
+                                 
+                                                                                   
+   
+
+                                                                             
+.ui-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --mobile-nav-height: 66px;
+    --mobile-player-height: 126px;
+    --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --button-size: 44px;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-width: 320px;
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--theme-background);
+  }
+
+  .header {
+    height: 56px;
+    min-height: 56px;
+    padding: 0 14px;
+  }
+
+  .logo-container {
+    min-width: 0;
+    font-size: 17px;
+  }
+
+  .profile-avatar-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .profile-dropdown {
+    right: 0;
+    left: auto;
+    width: min(280px, calc(100vw - 28px)) !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 28px);
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-container,
+  .content-wrapper {
+    min-width: 0;
+  }
+
+  .content {
+    gap: 14px;
+    padding: 14px 14px
+      calc(
+        var(--mobile-player-height) + var(--mobile-nav-height) +
+          var(--mobile-safe-bottom) + 26px
+      );
+    overscroll-behavior-y: contain;
+  }
+
+  .filter-area,
+  .playlists-page .filter-area {
+    width: calc(100% + 28px);
+    margin: -14px -14px 0;
+    padding: 10px 14px;
+  }
+
+  .filter-area .filter-bar {
+    display: grid;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .diary-page .filter-bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .playlists-page .filter-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-field,
+  .filter-form-actions,
+  .filter-actions {
+    min-width: 0;
+  }
+
+  .filter-field:first-child {
+    flex: auto;
+  }
+
+  .filter-area .filter-field select {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px;
+  }
+
+  .filter-field.filter-field-icon {
+    position: relative;
+    width: 100%;
+  }
+
+  .filter-field.filter-field-icon > .bi {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    color: var(--theme-text);
+    font-size: 19px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
+
+  .filter-field.filter-field-icon select {
+    appearance: none;
+    padding: 0;
+    color: transparent;
+    text-indent: -9999px;
+  }
+
+  .filter-field.filter-field-icon select:focus,
+  .filter-field.filter-field-icon select:valid {
+    color: transparent;
+  }
+
+  .filter-area .filter-calendar-btn,
+  .filter-area .filter-actions button {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 44px;
+    min-height: 44px;
+  }
+
+  .filter-area .filter-field:has(> .filter-calendar-btn) {
+    display: block;
+  }
+
+  .filter-area .filter-field > .filter-calendar-btn {
+    display: grid;
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .filter-form-actions {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    order: 3;
+  }
+
+  .filter-form-actions button,
+  .filter-form-actions .reset-filters-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .filter-actions {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    order: 4;
+    margin-left: 0;
+  }
+
+  .filter-actions #viewToggleBtn {
+    grid-column: 2;
+  }
+
+  .filter-actions #addTrackBtn,
+  .filter-actions #playlistAddAction {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .filter-actions #deleteTrackBtn,
+  .filter-actions #deletePlaylistBtn {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .filter-actions:has(#viewToggleBtn[hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-actions:has(#viewToggleBtn[hidden]) #addTrackBtn,
+  .filter-actions:has(#viewToggleBtn[hidden]) #playlistAddAction {
+    grid-column: 1;
+  }
+
+  .filter-actions:has(#viewToggleBtn[hidden]) #deleteTrackBtn,
+  .filter-actions:has(#viewToggleBtn[hidden]) #deletePlaylistBtn {
+    grid-column: 2;
+  }
+
+  .filter-actions .delete-mode-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-actions .delete-mode-actions button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .date-range-popover {
+    position: fixed;
+    top: 106px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: none;
+    z-index: 110;
+  }
+
+  .track-card {
+    min-width: 0;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .track-card-top {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-areas:
+      "cover info"
+      "description description"
+      "meta meta";
+    align-items: center;
+    gap: 10px 12px;
+  }
+
+  .track-cover {
+    grid-area: cover;
+    width: 58px;
+    height: 58px;
+  }
+
+  .track-info {
+    grid-area: info;
+    min-width: 0;
+  }
+
+  .track-title,
+  .track-artist,
+  .track-description,
+  .playlist-card h2,
+  .playlist-card p,
+  .playlist-track-data h2,
+  .playlist-track-data p,
+  .profile-track h3,
+  .profile-track p,
+  .profile-playlist h3,
+  .profile-playlist p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .track-title,
+  .playlist-card h2,
+  .playlist-track-data h2,
+  .profile-track h3,
+  .profile-playlist h3 {
+    white-space: nowrap;
+  }
+
+  .track-description {
+    grid-area: description;
+    width: 100%;
+    height: 78px;
+    min-height: 78px;
+    padding: 9px 10px;
+    line-height: 1.35;
+  }
+
+  .track-meta-badges {
+    grid-area: meta;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+  }
+
+  .track-meta-badges .badge {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 8px;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .track-card-bottom {
+    gap: 8px;
+  }
+
+  .card-controls {
+    gap: 8px;
+  }
+
+  .card-controls button,
+  .card-play-btn,
+  .card-menu-btn,
+  .playlist-track-actions button,
+  .profile-track-actions button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .delete-card-selector {
+    display: none !important;
+  }
+
+                                                                             
+  .content.delete-mode .track-card.is-selected-for-delete,
+  .content.delete-mode .playlist-card.is-selected-for-delete {
+    border-color: var(--theme-border);
+  }
+
+  .content.delete-mode .track-card-top {
+    position: relative;
+  }
+
+  .content.delete-mode .track-card:not(.create-entry-card) .track-cover,
+  .content.delete-mode .playlist-card:not(.create-entry-card) .playlist-art {
+    opacity: 0;
+  }
+
+  .content.delete-mode
+    .track-card:not(.create-entry-card)
+    .track-card-top::before,
+  .content.delete-mode .playlist-card:not(.create-entry-card)::before {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 6px;
+    background: linear-gradient(
+      135deg,
+      var(--theme-inactive),
+      var(--theme-surface-muted)
+    );
+    content: "";
+    pointer-events: none;
+  }
+
+  .content.delete-mode
+    .track-card:not(.create-entry-card)
+    .track-card-top::before {
+    top: 0;
+    left: 0;
+  }
+
+  .content.delete-mode .playlist-card:not(.create-entry-card)::before {
+    top: 10px;
+    left: 10px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .content.delete-mode
+    .track-card.is-selected-for-delete
+    .track-card-top::after,
+  .content.delete-mode .playlist-card.is-selected-for-delete::after {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border: 1px solid var(--theme-accent);
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--theme-accent), #d8792e);
+    color: var(--theme-background);
+    content: "✓";
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .content.delete-mode
+    .track-card.is-selected-for-delete
+    .track-card-top::after {
+    top: 0;
+    left: 0;
+  }
+
+  .content.delete-mode .playlist-card.is-selected-for-delete::after {
+    top: 10px;
+    left: 10px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .diary-page .filter-actions {
+    justify-content: stretch;
+  }
+
+  .content.playlists-page,
+  .content.playlists-page.grid-view {
+    display: flex;
+  }
+
+  .playlists-grid,
+  .playlists-page.grid-view .playlists-grid,
+  .profile-playlist-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .playlist-card,
+  .create-track-card,
+  .create-playlist-card {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .create-track-card,
+  .create-playlist-card {
+    grid-template-columns: 64px minmax(0, 1fr);
+    min-height: 106px;
+  }
+
+  .playlist-art,
+  .create-entry-art,
+  .playlist-art.create-entry-art {
+    width: 64px;
+    height: 64px;
+  }
+
+  .playlist-card h2 {
+    font-size: 16px;
+  }
+
+  .playlist-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+
+  .track-detail-page,
+  .playlist-detail-page,
+  .profile-page {
+    padding: 16px 14px
+      calc(
+        var(--mobile-player-height) + var(--mobile-nav-height) +
+          var(--mobile-safe-bottom) + 24px
+      );
+  }
+
+  .track-detail-page {
+    display: block;
+    overflow-y: auto;
+  }
+
+  .playlist-detail-page {
+    display: block;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .playlist-detail-page .playlist-track-list {
+    display: grid;
+    flex: none;
+    max-height: 60dvh;
+    overflow-y: auto;
+    padding-bottom: 6px;
+  }
+
+  .track-detail-hero,
+  .playlist-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .detail-cover-frame,
+  .track-detail-cover,
+  .playlist-detail-cover {
+    width: min(52vw, 184px);
+    height: min(52vw, 184px);
+  }
+
+  .track-detail-info h1,
+  .playlist-hero-info h1 {
+    font-size: clamp(29px, 9vw, 42px);
+    overflow-wrap: anywhere;
+  }
+
+  .track-detail-summary,
+  .playlist-hero-info .track-detail-summary {
+    line-height: 1.45;
+  }
+
+  .track-detail-actions,
+  .playlist-detail-actions {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 6px 0 8px;
+  }
+
+  .track-right-actions,
+  .playlist-edit-actions {
+    margin-left: auto;
+  }
+
+  .track-more-menu,
+  .playlist-more-menu {
+    right: 0;
+    left: auto;
+    width: min(270px, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+  }
+
+  .track-long-text {
+    flex: none;
+    min-height: 260px;
+    overflow: visible;
+    padding: 15px;
+  }
+
+  .playlist-track-row {
+    grid-template-columns: 50px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .playlist-track-art {
+    width: 50px;
+    height: 50px;
+  }
+
+  .playlist-track-art-shell {
+    width: 50px;
+    height: 50px;
+  }
+
+  .playlist-track-row time {
+    display: none;
+  }
+
+  .playlist-track-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 40px);
+    justify-content: end;
+    gap: 8px;
+  }
+
+  .profile-hero {
+    grid-template-columns: 92px minmax(0, 1fr) 36px !important;
+    grid-template-areas:
+      "avatar name edit"
+      "avatar username edit"
+      "bio bio bio"
+      "city counts counts";
+    gap: 6px 12px;
+    align-items: start;
+    padding-bottom: 18px;
+  }
+
+  .profile-page-avatar {
+    grid-area: avatar;
+    width: 92px;
+    height: 92px;
+  }
+
+  .profile-page-avatar .bi {
+    font-size: 44px;
+  }
+
+  .profile-hero > div:not(.profile-page-avatar) {
+    display: contents;
+  }
+
+  .profile-hero h1 {
+    grid-area: name;
+    margin: 0;
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-hero > div:not(.profile-page-avatar) > p:not(.profile-location) {
+    grid-area: bio;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .profile-hero > div:not(.profile-page-avatar) > p.profile-username {
+    grid-area: username;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-hero [data-profile-field="bio"] {
+    overflow-wrap: anywhere;
+  }
+
+  .profile-location {
+    grid-area: city;
+    display: flex;
+    gap: 4px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-country,
+  .profile-city {
+    min-width: 0;
+    margin: 4px 0 0 !important;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .profile-country {
+    grid-area: country;
+  }
+
+  .profile-country .bi {
+    color: var(--theme-accent);
+  }
+
+  .profile-city {
+    grid-area: city;
+    margin-top: 0 !important;
+    color: var(--theme-text-muted);
+  }
+
+  .profile-hero .profile-settings-btn {
+    width: 36px;
+    height: 36px;
+    grid-area: edit;
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: auto;
+    justify-self: end;
+  }
+
+  .profile-counts {
+    grid-area: counts;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: start;
+    gap: 3px;
+    min-width: 0;
+    margin: 4px 0 0 auto;
+    font-size: 12px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .profile-section {
+    margin-top: 24px;
+  }
+
+  .profile-section-title {
+    gap: 8px;
+  }
+
+  .profile-track {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 10px;
+  }
+  .profile-track:not(.profile-empty-card) {
+    height: 70px;
+  }
+
+  .profile-track > span {
+    display: none;
+  }
+
+  .profile-track-actions {
+    grid-column: 3 / 4;
+    grid-row: 1;
+    gap: 4px;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  }
+
+  .profile-track-actions button {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    border-width: 1px;
+  }
+
+  .profile-track > section {
+    min-width: 0;
+  }
+
+  .profile-track p {
+    white-space: nowrap;
+  }
+
+  .profile-track.is-item-loading {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .profile-track.is-item-loading .profile-track-actions {
+    display: none;
+  }
+
+  .profile-track.profile-empty-card {
+    min-height: 68px;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+
+  .profile-track.profile-empty-card p {
+    white-space: normal;
+  }
+
+  .profile-playlist.profile-empty-card {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+
+  .playlist-track-empty-card {
+    min-height: 110px;
+  }
+
+  .profile-playlist {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .profile-playlist > div {
+    width: 64px;
+    height: 64px;
+  }
+
+  .profile-show-more {
+    min-height: 44px;
+    padding: 0 14px;
+  }
+
+  .player-bar {
+    position: fixed;
+    right: 0;
+    bottom: calc(var(--mobile-nav-height) + var(--mobile-safe-bottom));
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 40px 38px;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 6px;
+    min-height: var(--mobile-player-height);
+    height: var(--mobile-player-height);
+    padding: 8px 14px;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .player-controls-container {
+    display: contents;
+  }
+
+  .player-track-info {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .player-cover {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  .player-text {
+    min-width: 0;
+  }
+
+  .player-text .title,
+  .player-text .artist {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .player-buttons {
+    grid-column: 1;
+    grid-row: 2;
+    gap: 4px;
+  }
+
+  .player-buttons .player-icon-btn:not(.main-play) {
+    display: grid;
+  }
+
+  .player-icon-btn,
+  .player-buttons .main-play,
+  .player-actions .player-icon-btn {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    border-width: 1px;
+  }
+
+  .player-actions {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 4px;
+    justify-self: end;
+  }
+
+  .progress-container {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+  }
+
+  .ui-bottom-nav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 31;
+    display: grid;
+    height: calc(var(--mobile-nav-height) + var(--mobile-safe-bottom));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    padding: 6px 8px calc(6px + var(--mobile-safe-bottom));
+    border-top: 1px solid var(--theme-border);
+    background: var(--theme-surface);
+    box-shadow: 0 -9px 22px rgb(0 0 0 / 18%);
+  }
+
+  .ui-bottom-nav a,
+  .ui-bottom-nav button {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    height: 50px;
+    place-items: center;
+    gap: 2px;
+    padding: 3px 4px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--theme-text-muted);
+    font: inherit;
+    font-size: 10px;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .ui-bottom-nav .bi {
+    color: var(--theme-accent);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .ui-bottom-nav a[aria-current="page"] {
+    background: var(--theme-inactive);
+    color: var(--theme-text);
+  }
+
+  .settings-modal,
+  .creation-modal,
+  .welcome-modal {
+    align-items: center;
+    justify-items: center;
+    padding: 12px;
+  }
+
+  .settings-window,
+  .creation-window,
+  .welcome-modal-card {
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100dvh - 24px);
+    overflow: auto;
+    border-radius: 14px;
+  }
+
+  .settings-close,
+  .creation-close,
+  .welcome-close {
+    display: grid !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    border: 1px solid var(--theme-accent) !important;
+    border-radius: 7px !important;
+    background: transparent !important;
+    color: var(--theme-text) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  .settings-close .bi,
+  .creation-close .bi,
+  .welcome-close .bi {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .settings-window {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--theme-border);
+  }
+
+  .settings-nav h3 {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .settings-nav .settings-tab {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 38px;
+    padding: 0 10px;
+  }
+
+  .settings-content,
+  .creation-body {
+    padding: 16px;
+  }
+
+  .creation-header,
+  .creation-footer,
+  .settings-footer {
+    padding: 14px 16px;
+  }
+
+  .creation-grid.two-columns,
+  .track-details,
+  .review-media-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .track-details {
+    gap: 12px;
+  }
+
+  .review-media-editor {
+    align-items: start;
+  }
+
+  .review-cover-picker,
+  .review-cover-preview {
+    width: 112px;
+    min-height: 112px;
+  }
+
+  .add-playlist-menu {
+    width: min(300px, calc(100vw - 24px));
+  }
+
+  .sonary-queue-panel.is-modal {
+    padding: 12px 12px
+      calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 12px) !important;
+  }
+
+  .sonary-queue-surface {
+    width: calc(100vw - 24px) !important;
+    height: min(
+      680px,
+      calc(100dvh - var(--mobile-nav-height) - var(--mobile-safe-bottom) - 24px)
+    ) !important;
+  }
+
+  .sonary-queue-list {
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .filter-area,
+  .playlists-page .filter-area {
+    width: calc(100% + 20px);
+    margin-right: -10px;
+    margin-left: -10px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .filter-field:first-child {
+    flex-basis: auto;
+  }
+
+  .filter-field.filter-field-icon:first-child {
+    flex-basis: auto;
+  }
+
+  .track-card {
+    padding: 10px;
+  }
+
+  .track-meta-badges {
+    gap: 6px;
+  }
+
+  .track-meta-badges .badge {
+    min-height: 38px;
+    font-size: 11px;
+  }
+
+  .track-detail-page,
+  .playlist-detail-page,
+  .profile-page {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .detail-cover-frame,
+  .track-detail-cover,
+  .playlist-detail-cover {
+    width: min(58vw, 170px);
+    height: min(58vw, 170px);
+  }
+
+  .track-detail-badges {
+    gap: 6px;
+  }
+
+  .track-detail-badges span {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .playlist-track-actions {
+    grid-template-columns: repeat(4, 38px);
+    gap: 6px;
+  }
+
+  .playlist-track-actions button,
+  .profile-track-actions button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .player-bar {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .player-actions .player-icon-btn,
+  .player-buttons .main-play {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+  }
+
+  .player-actions {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 760px) {
+  .playlist-track-row {
+    grid-template-columns: 50px minmax(0, 1fr) auto !important;
+    align-items: center;
+  }
+
+  .playlist-track-actions,
+  .profile-track-actions {
+    grid-column: 3 / 4 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px !important;
+    flex-wrap: nowrap;
+  }
+
+  .playlist-track-actions button,
+  .playlist-track-actions .track-like-action,
+  .profile-track-actions button,
+  .profile-track-actions .track-like-action {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    border-width: 1px !important;
+    border-radius: 5px !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .track-detail-badges,
+  .playlist-detail-badges {
+    grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .track-detail-badges span,
+  .playlist-detail-badges span {
+    width: 100%;
+    min-height: 30px;
+    padding: 6px 5px !important;
+    font-size: 10px;
+  }
+
+  .queue-action-menu {
+    width: min(240px, calc(100vw - 24px));
+  }
+}

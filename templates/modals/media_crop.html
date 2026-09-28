@@ -1,0 +1,54 @@
+<div class="settings-modal media-crop-modal" id="mediaCropModal" hidden>
+  <section
+    class="settings-window media-crop-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mediaCropTitle"
+  >
+    <button
+      class="settings-close"
+      type="button"
+      data-media-crop-cancel
+      aria-label="Закрыть"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <div class="media-crop-content">
+      <div>
+        <p class="creation-eyebrow">Изображение</p>
+        <h2 id="mediaCropTitle">Настроить фотографию</h2>
+        <p class="media-crop-hint">
+          Перетащите изображение в рамке и выберите масштаб.
+        </p>
+      </div>
+      <div class="media-crop-stage" data-media-crop-stage>
+        <canvas
+          id="mediaCropCanvas"
+          width="900"
+          height="900"
+          aria-label="Область кадрирования фотографии"
+        ></canvas>
+      </div>
+      <div class="media-crop-controls">
+        <label
+          >Масштаб
+          <input
+            id="mediaCropZoom"
+            type="range"
+            min="100"
+            max="250"
+            value="100"
+            step="1"
+        /></label>
+        <button class="settings-secondary" type="button" data-media-crop-rotate>
+          <i class="bi bi-arrow-clockwise"></i> Повернуть
+        </button>
+      </div>
+      <footer class="media-crop-actions">
+        <button class="settings-secondary" type="button" data-media-crop-cancel>
+          Отмена</button
+        ><button type="button" data-media-crop-apply>Применить</button>
+      </footer>
+    </div>
+  </section>
+</div>

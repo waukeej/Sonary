@@ -1,0 +1,203 @@
+<div class="settings-modal" id="profileEditModal" hidden>
+  <div
+    class="settings-window profile-edit-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="profileEditTitle"
+  >
+    <button
+      class="settings-close"
+      id="closeProfileEditBtn"
+      type="button"
+      aria-label="Закрыть"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <section class="settings-content">
+      <h2 id="profileEditTitle">Редактировать профиль</h2>
+      <form
+        class="profile-edit-form"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="profile-edit-top">
+          <div class="profile-edit-avatar">
+            <div class="profile-edit-preview">
+              <img
+                class="profile-avatar-image"
+                data-profile-avatar
+                data-avatar-seed="{{ profile.id if profile and profile.id else '10012030' }}"
+                data-avatar-custom="{{ 'true' if profile and profile.avatar_url else 'false' }}"
+                src="{{ profile.avatar_url if profile and profile.avatar_url else url_for('static', filename='images/avatars/avatar-1.png') }}"
+                alt="Аватарка пользователя"
+              />
+            </div>
+            <label
+              >Аватарка
+              <input
+                type="file"
+                name="avatar"
+                accept="image/png,image/jpeg,image/webp"
+                data-media-crop="avatar"
+            /></label>
+          </div>
+          <label
+            >Имя
+            <input
+              name="display_name"
+              type="text"
+              maxlength="100"
+              value="{{ profile.display_name }}" /><small
+              class="profile-field-error"
+              data-profile-error="display_name"
+              role="alert"
+              hidden
+            ></small
+          ></label>
+        </div>
+        <label
+          >О себе
+          <textarea name="bio" maxlength="1000">{{ profile.bio }}</textarea
+          ><small
+            class="profile-field-error"
+            data-profile-error="bio"
+            role="alert"
+            hidden
+          ></small></label
+        ><label
+          >Город
+          <input
+            name="city"
+            type="text"
+            maxlength="100"
+            value="{{ profile.city }}"
+            placeholder="Введите город" /><small
+            class="profile-field-error"
+            data-profile-error="city"
+            role="alert"
+            hidden
+          ></small></label
+        ><small
+          class="profile-field-error"
+          data-profile-error="avatar"
+          role="alert"
+          hidden
+        ></small
+        ><small
+          class="profile-field-error"
+          data-profile-error="form"
+          role="alert"
+          hidden
+        ></small>
+        <div class="profile-edit-actions">
+          <button
+            class="settings-secondary"
+            id="cancelProfileEditBtn"
+            type="button"
+          >
+            Отмена</button
+          ><button type="submit">Сохранить</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+<div class="settings-modal" id="profileHeaderModal" hidden>
+  <section
+    class="settings-window profile-header-window"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Карта участника"
+    data-member-id="{{ profile.id if profile and profile.id else '10012030' }}"
+    data-member-photo="{{ profile.avatar_url if profile and profile.avatar_url else '' }}"
+    data-member-signature="{{ profile.signature_url if profile and profile.signature_url else '' }}"
+  >
+    <button
+      class="settings-close"
+      id="closeProfileHeaderBtn"
+      type="button"
+      aria-label="Закрыть"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <section class="settings-content member-card-content">
+      <article class="sonary-member-card" id="memberCard">
+        <header class="member-card-brand">
+          <strong>SONARY</strong><span>КАРТА УЧАСТНИКА</span>
+        </header>
+        <footer class="member-card-service-row">
+          <div>
+            <span>ДАТА ВСТУПЛЕНИЯ</span
+            ><strong
+              id="memberJoinedDate"
+              data-profile-field="joined_date"
+              data-no-i18n
+              >{{ profile.joined_date }}</strong
+            >
+          </div>
+          <svg
+            class="member-service-emblem"
+            viewBox="0 0 32 38"
+            aria-hidden="true"
+          >
+            <path
+              class="member-shield-outline"
+              d="M16 2 28 7v10c0 8-4.8 14.7-12 18-7.2-3.3-12-10-12-18V7Z"
+            />
+            <path
+              class="member-shield-star"
+              d="m16 9 2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7Z"
+            />
+          </svg>
+          <div>
+            <span>ТРЕКИ</span
+            ><strong>{{ profile.track_count if profile else 0 }}</strong>
+          </div>
+        </footer>
+        <section class="member-card-main">
+          <div class="member-photo-frame">
+            <img id="memberCardPhoto" alt="Фотография пользователя" hidden />
+            <div
+              class="member-photo-placeholder"
+              id="memberCardPhotoPlaceholder"
+            >
+              <span>ФОТО</span>
+            </div>
+          </div>
+          <div class="member-card-identity">
+            <h2 data-profile-field="username" data-no-i18n>
+              {{ profile.username if profile and profile.username else 'Никнейм' }}
+            </h2>
+            <p data-profile-field="city" data-no-i18n>{{ profile.city }}</p>
+            <p class="member-bio" data-profile-field="bio" data-no-i18n>
+              {{ profile.bio }}
+            </p>
+          </div>
+        </section>
+        <section class="member-card-credentials">
+          <div class="member-credential">
+            <span>ПОДПИСЬ</span>
+            <div class="member-credential-surface member-signature-box">
+              <img id="memberCardSignature" alt="Подпись пользователя" hidden />
+            </div>
+          </div>
+          <div class="member-credential">
+            <span>КОД УЧАСТНИКА</span>
+            <div class="member-credential-surface member-code-box">
+              <svg
+                id="memberBarcode"
+                role="img"
+                aria-label="Штрихкод участника"
+              ></svg
+              ><strong id="memberCode"></strong>
+            </div>
+          </div>
+        </section>
+      </article>
+      <div class="member-card-actions">
+        <button type="button" data-member-export="png">Скачать PNG</button>
+        <button type="button" data-member-export="jpeg">Скачать JPEG</button>
+      </div>
+    </section>
+  </section>
+</div>

@@ -1,0 +1,69 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Плейлисты — Sonary{% endblock %}
+{% block content %}
+  {% from 'components/cards/playlist_card.html' import playlist_card %}
+  {% set page_playlists = playlists|default([]) %}
+  <main class="content playlists-page">
+    {% include 'components/filters/playlist_filters.html' %}
+    {% for error in (filter_errors|default({})).values() %}<p
+      class="auth-error"
+    >
+      {{ error }}
+    </p>{% endfor %}
+    <section class="diary-action-row" aria-label="Действия плейлиста">
+      <button
+        class="diary-action-card create-entry-card create-track-card"
+        type="button"
+        aria-label="Создать плейлист"
+        data-create-playlist-card
+      >
+        <div class="create-entry-art" aria-hidden="true">
+          <i class="bi bi-plus-lg"></i>
+        </div>
+        <div class="create-entry-copy">
+          <h2>Создать</h2>
+          <p>Новый плейлист</p>
+        </div>
+      </button>
+      <button
+        class="diary-action-card create-entry-card create-track-card delete-entry-card"
+        type="button"
+        aria-label="Удалить плейлисты"
+        data-delete-playlist-action
+        {% if not page_playlists %}disabled{% endif %}
+      >
+        <div class="create-entry-art" aria-hidden="true">
+          <i class="bi bi-dash-lg"></i>
+        </div>
+        <div class="create-entry-copy">
+          <h2>Удалить</h2>
+          <p>Удалить плейлисты</p>
+        </div>
+      </button>
+    </section>
+    {% if not page_playlists and request.args %}<p class="diary-empty-results">
+      Нет подходящих плейлистов
+    </p>{% endif %}
+    <section class="playlists-grid" id="playlistsGrid">
+      {% for playlist in page_playlists %}{{ playlist_card(playlist) }}{% endfor %}
+    </section>
+  </main>
+{% endblock %}
+{% block scripts %}
+  <script
+    src="{{ url_for('static', filename='js/filters.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/view-toggle.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/playlists.js') }}"
+    defer
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/playlist-delete-mode.js') }}"
+    defer
+  ></script>
+{% endblock %}

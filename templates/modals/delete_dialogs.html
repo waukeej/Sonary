@@ -1,0 +1,55 @@
+<div class="creation-modal delete-dialog" id="deleteSelectionDialog" hidden>
+  <section
+    class="creation-window delete-dialog-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteSelectionTitle"
+  >
+    <div class="creation-header">
+      <div>
+        <p class="creation-eyebrow">Внимание</p>
+        <h2 id="deleteSelectionTitle">Вы хотите удалить записи</h2>
+      </div>
+    </div>
+    <div class="creation-body">
+      <p class="delete-dialog-text">
+        Выбранные записи будут удалены без возможности восстановления.
+      </p>
+      <div class="delete-selection-list"></div>
+    </div>
+    <div class="creation-footer">
+      <button class="settings-secondary delete-dialog-cancel" type="button">
+        Отмена</button
+      ><button class="creation-submit delete-dialog-next" type="button">
+        Подтвердить
+      </button>
+    </div>
+  </section>
+</div>
+<div class="creation-modal delete-dialog" id="deleteWarningDialog" hidden>
+  <section
+    class="creation-window delete-dialog-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteWarningTitle"
+  >
+    <div class="creation-header">
+      <div>
+        <p class="creation-eyebrow">Внимание</p>
+        <h2 id="deleteWarningTitle">Запись будет удалена навсегда</h2>
+      </div>
+    </div>
+    <div class="creation-body">
+      <p class="delete-dialog-text">
+        После подтверждения восстановить её будет невозможно.
+      </p>
+    </div>
+    <div class="creation-footer">
+      <button class="settings-secondary delete-warning-cancel" type="button">
+        Отмена</button
+      ><button class="creation-submit delete-warning-confirm" type="button">
+        Подтвердить
+      </button>
+    </div>
+  </section>
+</div>

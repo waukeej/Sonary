@@ -1,0 +1,61 @@
+{% macro profile_track_card(track, context='profile', hidden=false) -%}
+{% if context == 'picker' %}
+  <label class="profile-track playlist-track-choice">
+{% elif context == 'queue' %}
+  <article class="profile-track sonary-queue-item">
+{% else %}
+  <article
+    class="profile-track{% if context == 'playlist' %} playlist-compact-track{% endif %}"
+    data-href="{{ track.detail_url }}"
+    data-track-id="{{ track.id }}"
+    data-audio-url="{{ track.audio_url }}"
+    {% if hidden %}hidden{% endif %}
+  >
+{% endif %}
+<div class="profile-track-cover">
+  <img src="{{ track.cover }}" alt="Обложка {{ track.title }}">
+</div>
+<section>
+  <h3 data-no-i18n>{{ track.title }}</h3>
+  <p data-no-i18n>{{ track.artist }}</p>
+</section>
+{% if context == 'picker' %}
+  <input
+    class="playlist-track-checkbox"
+    type="checkbox"
+    value="{{ track.id }}"
+    aria-label="Выбрать {{ track.title }}"
+  >
+{% elif context == 'queue' %}
+  <div class="queue-track-actions">
+    <span data-queue-duration>{{ track.duration }}</span>
+    <button type="button" data-queue-play aria-label="Воспроизвести">
+      <i class="bi bi-play-fill"></i>
+    </button>
+    <span class="sonary-drag-handle" aria-label="Перетащить">
+      <i class="bi bi-grip-vertical"></i>
+    </span>
+  </div>
+{% else %}
+  <span>{{ track.duration }}</span>
+  <div class="profile-track-actions playlist-track-actions">
+    <button type="button" aria-label="Воспроизвести">
+      <i class="bi bi-play-fill"></i>
+    </button>
+    <button class="card-like-btn" type="button" aria-label="Нравится">
+      <i class="bi bi-heart"></i>
+    </button>
+    <button type="button" aria-label="Добавить в плейлист">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+    <button type="button" aria-label="Добавить в очередь">
+      <i class="bi bi-music-note-list"></i>
+    </button>
+  </div>
+{% endif %}
+{% if context == 'picker' %}
+  </label>
+{% else %}
+  </article>
+{% endif %}
+{%- endmacro %}

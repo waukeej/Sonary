@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    {% include 'components/localization_assets.html' %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonary</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/welcome.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/ui-states.css') }}"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/welcome-background.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/ui-states.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/developer-events.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/landing-flow.js') }}"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/theme-light.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/preferences.js') }}"></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='js/auth-client.js') }}"
+    ></script>
+    <script
+      defer
+      src="{{ url_for('static', filename='js/localization.js') }}"
+    ></script>
+  </head>
+  <body>
+    <div class="welcome-intro" aria-hidden="true">
+      <div class="welcome-intro-spinner">
+        {% for particle in range(100) %}<i style="--particle: {{ particle }}"
+          ><b></b
+        ></i>{% endfor %}
+      </div>
+      <span>Sonary</span>
+    </div>
+    <main class="welcome-page">
+      <section class="welcome-card" id="welcomeCard">
+        <div class="welcome-view" data-view="home">
+          <div class="welcome-mark">S</div>
+          <p class="welcome-eyebrow">SONARY</p>
+          <h1>Музыка, которая<br />звучит по-твоему</h1>
+          <p class="welcome-copy">
+            Создавай дневник треков, собирай плейлисты и возвращайся к любимым
+            историям.
+          </p>
+          <div class="welcome-actions">
+            {% if is_member %}<a
+              class="welcome-action"
+              href="{{ url_for('main.diary') }}"
+              >Перейти в приложение</a
+            ><button type="button" data-landing-logout>
+              Выйти
+            </button>{% else %}<button type="button" data-go="login-name">
+              Войти</button
+            ><button
+              type="button"
+              class="welcome-secondary"
+              data-go="register-profile"
+            >
+              Зарегистрироваться
+            </button>{% endif %}
+          </div>
+        </div>
+
+        <form
+          method="post"
+          class="welcome-view welcome-form"
+          data-view="login-name"
+          hidden
+        >
+          <button class="welcome-back" type="button" data-back>← Назад</button>
+          <p class="welcome-eyebrow">ВХОД</p>
+          <h2>Как вас найти?</h2>
+          <p>Введите логин или адрес электронной почты.</p>
+          <label
+            >Логин или почта<input
+              name="identity"
+              autocomplete="username"
+              aria-describedby="loginIdentityError"
+              required
+              autofocus /><small
+              class="welcome-field-error"
+              id="loginIdentityError"
+              role="alert"
+              hidden
+            ></small></label
+          ><button type="submit">Дальше</button>
+        </form>
+        <form
+          method="post"
+          class="welcome-view welcome-form"
+          data-view="login-password"
+          hidden
+        >
+          <button class="welcome-back" type="button" data-back>← Назад</button>
+          <p class="welcome-eyebrow">ВХОД</p>
+          <h2>Введите пароль</h2>
+          <p>Сначала подтвердим данные аккаунта.</p>
+          <label
+            >Пароль<input
+              name="password"
+              autocomplete="current-password"
+              type="password"
+              required /></label
+          ><button type="submit">Дальше</button>
+        </form>
+
+        <form
+          method="post"
+          class="welcome-view welcome-form"
+          data-view="register-profile"
+          hidden
+        >
+          <button class="welcome-back" type="button" data-back>← Назад</button>
+          <p class="welcome-eyebrow">РЕГИСТРАЦИЯ</p>
+          <h2>Расскажите о себе</h2>
+          <p>Эти данные понадобятся для создания аккаунта.</p>
+          <div class="welcome-field-grid">
+            <label
+              >Имя<input
+                name="firstName"
+                autocomplete="given-name"
+                required /></label
+            ><label
+              >Фамилия<input
+                name="lastName"
+                autocomplete="family-name"
+                required
+            /></label>
+          </div>
+          <label
+            >Логин<input
+              name="username"
+              autocomplete="username"
+              aria-describedby="registerUsernameError"
+              required /><small
+              class="welcome-field-error"
+              id="registerUsernameError"
+              role="alert"
+              hidden
+            ></small></label
+          ><label
+            >Почта<input
+              name="email"
+              autocomplete="email"
+              type="email"
+              aria-describedby="registerEmailError"
+              required /><small
+              class="welcome-field-error"
+              id="registerEmailError"
+              role="alert"
+              hidden
+            ></small></label
+          ><button type="submit">Дальше</button>
+        </form>
+        <section
+          class="welcome-view registration-agreement"
+          data-view="register-agreement"
+          hidden
+          aria-labelledby="agreementTitle"
+        >
+          <header class="agreement-header">
+            <strong>SONARY</strong
+            ><button type="button" data-back aria-label="Назад">← Назад</button>
+          </header>
+          <div class="agreement-layout">
+            <section class="agreement-document-column">
+              <div class="agreement-intro">
+                <h2 id="agreementTitle">
+                  Согласие на обработку персональных данных
+                </h2>
+                <p>
+                  Я, <strong data-agreement-name>НИКНЕЙМ</strong>, подтверждаю,
+                  что ознакомился с информацией об обработке персональных данных
+                  в Sonary и даю согласие на обработку моих данных на условиях
+                  настоящего документа.
+                </p>
+              </div>
+              <div
+                class="agreement-accordion-list"
+                aria-label="Разделы документа"
+              >
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>1.</b> Обрабатываемые данные</span>
+                  </summary>
+                  <p>
+                    Sonary может обрабатывать адрес электронной почты, имя
+                    пользователя, отображаемое имя, фотографию и описание
+                    профиля, сведения о музыкальных записях, плейлистах, оценках
+                    и настроении, настройки аккаунта и технические данные,
+                    необходимые для работы и безопасности сервиса.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>2.</b> Цели обработки</span>
+                  </summary>
+                  <p>
+                    Данные используются для создания и работы аккаунта,
+                    авторизации, сохранения настроек, работы музыкального
+                    дневника, хранения пользовательского контента, обеспечения
+                    безопасности, восстановления доступа, диагностики ошибок и
+                    улучшения функций Sonary.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>3.</b> Конфиденциальность</span>
+                  </summary>
+                  <p>
+                    Sonary не продаёт персональные данные и не передаёт их
+                    рекламодателям. Доступ третьих лиц допускается только в
+                    объёме, необходимом для работы сервиса, защиты пользователей
+                    или исполнения требований закона.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>4.</b> Публичные и приватные данные</span>
+                  </summary>
+                  <p>
+                    Пользователь самостоятельно определяет публичность доступных
+                    настроек профиля. Данные, обозначенные интерфейсом как
+                    приватные, не предназначены для отображения другим
+                    пользователям.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>5.</b> Загруженные материалы</span>
+                  </summary>
+                  <p>
+                    Файлы могут храниться и технически обрабатываться в объёме,
+                    необходимом для работы выбранных функций. Sonary не получает
+                    право собственности на материалы пользователя.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>6.</b> Статистика и улучшение сервиса</span>
+                  </summary>
+                  <p>
+                    С отдельного согласия могут собираться агрегированные
+                    сведения об использовании разделов, ошибках, типе устройства
+                    и технических показателях производительности.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>7.</b> Безопасность и хранение</span>
+                  </summary>
+                  <p>
+                    Sonary принимает разумные меры защиты. Данные хранятся не
+                    дольше, чем это необходимо для целей обработки, разрешения
+                    споров, обеспечения безопасности и выполнения требований
+                    законодательства.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>8.</b> Права пользователя</span>
+                  </summary>
+                  <p>
+                    Пользователь вправе запросить сведения об обработке,
+                    исправление или удаление данных, ограничение обработки и
+                    отзыв ранее предоставленного согласия в предусмотренных
+                    законом случаях.
+                  </p>
+                </details>
+                <details class="agreement-item">
+                  <summary>
+                    <span><b>9.</b> Электронное подтверждение</span>
+                  </summary>
+                  <p>
+                    Рисуя подпись и нажимая кнопку подтверждения, пользователь
+                    подтверждает, что ознакомился с документом, понимает его
+                    содержание и добровольно соглашается с изложенными
+                    условиями.
+                  </p>
+                </details>
+              </div>
+            </section>
+            <aside class="agreement-approval-column">
+              <section class="agreement-consents">
+                <h3>Согласия</h3>
+                <div class="agreement-divider">ОБЯЗАТЕЛЬНЫЕ ДЕЙСТВИЯ</div>
+                <label class="agreement-consent"
+                  ><input
+                    class="agreement-required"
+                    type="checkbox"
+                  /><span></span><b>Я принимаю Условия использования</b
+                  ><a href="/?page=tos">Открыть документ ↗</a></label
+                ><label class="agreement-consent"
+                  ><input
+                    class="agreement-required"
+                    type="checkbox"
+                  /><span></span
+                  ><b>Я ознакомился с Политикой конфиденциальности</b
+                  ><a href="/?page=tos">Открыть документ ↗</a></label
+                ><label class="agreement-consent"
+                  ><input
+                    class="agreement-required"
+                    type="checkbox"
+                  /><span></span
+                  ><b
+                    >Я подтверждаю необходимые согласия на обработку
+                    персональных данных</b
+                  ><small
+                    >Необходимо для создания и использования аккаунта
+                    Sonary.</small
+                  ></label
+                >
+                <div class="agreement-divider">НЕОБЯЗАТЕЛЬНО</div>
+                <label class="agreement-consent is-optional"
+                  ><input type="checkbox" /><span></span
+                  ><b>Разрешить необязательную аналитику для улучшения Sonary</b
+                  ><small
+                    >Помогает находить ошибки и улучшать функции. Можно
+                    отключить в любое время.</small
+                  ></label
+                >
+              </section>
+              <section class="agreement-signature">
+                <div>
+                  <p>ЭЛЕКТРОННАЯ ПОДПИСЬ</p>
+                  <h3>Подпись участника</h3>
+                </div>
+                <button type="button" data-clear-signature>Очистить</button
+                ><canvas
+                  data-signature-pad
+                  width="900"
+                  height="240"
+                  aria-label="Поле электронной подписи"
+                ></canvas
+                ><small
+                  >Эта подпись подтверждает действие пользователя внутри Sonary
+                  и не является квалифицированной электронной подписью.</small
+                >
+              </section>
+            </aside>
+          </div>
+          <footer class="agreement-footer">
+            <div><span>ДАТА</span><strong data-agreement-date></strong></div>
+            <button type="button" data-confirm-agreement disabled>
+              Подтвердить согласие
+            </button>
+            <p>
+              Подтверждая документ, вы соглашаетесь с отмеченными выше
+              условиями. Необязательную аналитику можно отключить позднее в
+              настройках конфиденциальности.
+            </p>
+          </footer>
+        </section>
+        <form
+          method="post"
+          class="welcome-view welcome-form"
+          data-view="register-password"
+          hidden
+        >
+          <button class="welcome-back" type="button" data-back>← Назад</button>
+          <p class="welcome-eyebrow">РЕГИСТРАЦИЯ</p>
+          <h2>Придумайте пароль</h2>
+          <p>Используйте от 8 до 128 символов.</p>
+          <label
+            >Пароль<input
+              name="password"
+              autocomplete="new-password"
+              type="password"
+              required /></label
+          ><label
+            >Подтвердите пароль<input
+              minlength="8"
+              maxlength="128"
+              name="passwordConfirmation"
+              autocomplete="new-password"
+              type="password"
+              required /></label
+          ><button type="submit">Создать аккаунт</button>
+        </form>
+
+        <article class="welcome-view welcome-article" data-view="about" hidden>
+          <button class="welcome-back" type="button" data-back>← Назад</button>
+          <p class="welcome-eyebrow">SONARY</p>
+          <h2>О Sonary</h2>
+          <h3>Музыка — это больше, чем список прослушиваний</h3>
+          <p>
+            Sonary — это музыкальный дневник, созданный для того, чтобы
+            сохранять не только треки, но и впечатления, которые с ними связаны.
+          </p>
+          <p>
+            Здесь можно добавлять музыку в свою коллекцию, оценивать её, писать
+            собственные заметки и отзывы, отмечать настроение и собирать
+            плейлисты. Со временем из отдельных записей складывается личная
+            история музыки, которую ты слушал и которая что-то для тебя значила.
+          </p>
+          <h3>Зачем существует Sonary</h3>
+          <p>
+            Большинство музыкальных сервисов хорошо запоминают, <b>что</b> мы
+            слушаем. Но гораздо реже — <b>что мы об этом думали</b>.
+          </p>
+          <p>
+            Sonary появился из простой идеи: сделать место, куда можно вернуться
+            через несколько месяцев или лет и увидеть не просто название трека,
+            а собственное мнение о нём в тот момент.
+          </p>
+          <p>
+            Какая песня постоянно играла этим летом? Какой альбом сначала не
+            понравился, а потом стал любимым? Что ты слушал в определённый
+            период своей жизни? Sonary создан именно для таких вещей.
+          </p>
+          <h3>Passion Project</h3>
+          <p>
+            Sonary — независимый passion project. Он не создавался как стартап и
+            не строится вокруг идеи заработать как можно больше денег. Здесь нет
+            цели удерживать пользователя любой ценой, превращать каждую функцию
+            в платную подписку или заполнять интерфейс рекламой.
+          </p>
+          <p>
+            Мы хотим экспериментировать с дизайном, добавлять интересные
+            функции, учиться новому и постепенно превращать Sonary в продукт,
+            которым нам самим хотелось бы пользоваться. Поэтому решения здесь
+            принимаются не только исходя из того, что выгоднее, а исходя из
+            того, что делает Sonary лучше.
+          </p>
+          <h3>Место для твоей музыки</h3>
+          <p>
+            У каждого человека свои отношения с музыкой. Поэтому Sonary не
+            пытается определить, что тебе должно нравиться. Здесь нет
+            «правильных» оценок или мнений.
+          </p>
+          <p><b>Sonary — твоя история музыки.</b></p>
+        </article>
+
+        <article class="welcome-view welcome-article" data-view="faq" hidden>
+          <button
+            class="welcome-back"
+            type="button"
+            data-back
+            aria-label="Назад"
+          >
+            ←
+          </button>
+          <p class="welcome-eyebrow">SONARY</p>
+          <h2>Часто задаваемые вопросы</h2>
+          <p>
+            Здесь собраны ответы на основные вопросы о Sonary. Если нужного
+            ответа нет — возможно, мы просто ещё не успели добавить его сюда.
+          </p>
+          <h3>Что такое Sonary?</h3>
+          <p>
+            Это музыкальный дневник, в котором можно сохранять треки, оценивать
+            их, писать впечатления, создавать плейлисты и собирать собственную
+            историю музыки.
+          </p>
+          <h3>Sonary — это стриминговый сервис?</h3>
+          <p>
+            Нет. Sonary не пытается заменить Spotify, Apple Music, Яндекс Музыку
+            или другие сервисы. Главная идея — сохранить впечатления о музыке.
+          </p>
+          <h3>Sonary бесплатный?</h3>
+          <p>
+            Да. Это passion project; основными возможностями можно будет
+            пользоваться без подписки.
+          </p>
+          <h3>Зачем писать отзывы на музыку?</h3>
+          <p>
+            Не обязательно писать полноценную рецензию. Достаточно мысли или
+            впечатления, к которому будет интересно вернуться позже.
+          </p>
+          <h3>Можно ли создавать плейлисты?</h3>
+          <p>
+            Да. Сохранённые треки можно объединять в тематические коллекции:
+            любимые треки года, музыка периода жизни или подборка под
+            настроение.
+          </p>
+          <h3>Что означает настроение у записи?</h3>
+          <p>
+            Настроение дополняет воспоминание о музыке контекстом: один и тот же
+            трек может ассоциироваться с разными периодами и эмоциями.
+          </p>
+          <h3>Можно ли изменить запись позже?</h3>
+          <p>Да. Мнение о треке может измениться — и это нормально.</p>
+          <h3>Можно ли сделать плейлист приватным?</h3>
+          <p>
+            Да. Приватные плейлисты доступны только владельцу и не отображаются
+            публично.
+          </p>
+          <h3>Что происходит с моими данными?</h3>
+          <p>
+            Мы стремимся собирать только сведения, необходимые для работы
+            Sonary. Подробности описаны в Условиях использования.
+          </p>
+          <h3>Будет ли реклама?</h3>
+          <p>
+            Sonary не создаётся как рекламная площадка. Цель проекта — развивать
+            сам продукт, а не монетизировать внимание.
+          </p>
+          <h3>Кто делает Sonary?</h3>
+          <p>
+            Это независимый проект, который постепенно развивается благодаря
+            интересу к музыке, дизайну и разработке.
+          </p>
+          <h3>Sonary всё ещё разрабатывается?</h3>
+          <p>
+            Да. Функции и интерфейс могут меняться. Если у тебя есть идея,
+            замечание или найденная ошибка — обратная связь всегда полезна.
+          </p>
+        </article>
+
+        <article class="welcome-view welcome-article" data-view="tos" hidden>
+          <button
+            class="welcome-back"
+            type="button"
+            data-back
+            aria-label="Назад"
+          >
+            ←
+          </button>
+          <p class="welcome-eyebrow">SONARY</p>
+          <h2>Условия использования Sonary</h2>
+          <p><b>Последнее обновление:</b> [дата]</p>
+          <p>
+            Добро пожаловать в Sonary. Создавая аккаунт или используя сервис, вы
+            соглашаетесь соблюдать настоящие Условия использования. Если вы не
+            согласны с ними, пожалуйста, не используйте сервис.
+          </p>
+          <h3>1. О Sonary</h3>
+          <p>
+            Sonary — независимый некоммерческий passion project для ведения
+            музыкального дневника, сохранения впечатлений о музыке и создания
+            коллекций. Отдельные функции могут находиться в разработке,
+            изменяться или временно отключаться.
+          </p>
+          <h3>2. Аккаунт</h3>
+          <p>
+            Для части функций может понадобиться аккаунт. Вы обязуетесь
+            предоставлять достоверные сведения и отвечаете за действия,
+            совершённые через свой аккаунт.
+          </p>
+          <h3>3. Пользовательский контент</h3>
+          <p>
+            Права на созданные вами тексты, обложки, отзывы и другие материалы
+            остаются у вас. Загружая контент, вы подтверждаете, что имеете права
+            или разрешения на его использование.
+          </p>
+          <h3>4. Авторские права</h3>
+          <p>
+            Запрещено загружать или распространять материалы, нарушающие права
+            третьих лиц. Доступность произведения в интернете не означает
+            разрешения на его повторную публикацию.
+          </p>
+          <h3>5. Жалобы правообладателей</h3>
+          <p>
+            Если размещённый материал нарушает ваши права, вы можете направить
+            обращение через форму для жалоб или юридический email. В обращении
+            следует указать контактные данные, ссылку на материал и описание
+            нарушения.
+          </p>
+          <h3>6. Удаление и модерация контента</h3>
+          <p>
+            Sonary может ограничить доступ к материалу или удалить его при
+            нарушении закона, прав третьих лиц, настоящих условий или
+            безопасности сервиса.
+          </p>
+          <h3>7. Запрещённое использование</h3>
+          <p>
+            Нельзя публиковать незаконный контент, выдавать себя за другое лицо,
+            получать несанкционированный доступ, распространять вредоносный код,
+            спам или намеренно нарушать работу сервиса.
+          </p>
+          <h3>8. Лицензия для работы сервиса</h3>
+          <p>
+            Размещая контент, вы предоставляете Sonary ограниченное право
+            хранить и технически отображать его исключительно для работы функций
+            сервиса. Это не передаёт Sonary право собственности на ваш контент.
+          </p>
+          <h3>9. Сторонние сервисы и доступность</h3>
+          <p>
+            Sonary может использовать сторонние API и ссылки. Сервис
+            предоставляется «как есть» и «по мере доступности»; мы не можем
+            гарантировать постоянную работу всех функций.
+          </p>
+          <h3>10. Резервные копии и ответственность</h3>
+          <p>
+            Sonary не следует считать единственным местом хранения важных
+            данных. Рекомендуется самостоятельно сохранять их копии. В пределах,
+            разрешённых законом, разработчики не отвечают за косвенные убытки.
+          </p>
+          <h3>11. Прекращение доступа и изменение условий</h3>
+          <p>
+            Вы можете прекратить использование Sonary в любой момент. Мы можем
+            ограничить доступ при серьёзном или повторном нарушении условий.
+            Условия могут обновляться; дата последней редакции указывается в
+            начале документа.
+          </p>
+          <h3>12. Применимое право и связь с нами</h3>
+          <p>
+            Укажите применимую юрисдикцию, общий email, адрес для юридических
+            обращений и домен проекта перед публикацией сервиса.
+          </p>
+          <p>
+            Используя Sonary, вы подтверждаете, что ознакомились с настоящими
+            Условиями использования и соглашаетесь их соблюдать.
+          </p>
+        </article>
+      </section>
+      <nav class="welcome-footer" aria-label="Дополнительная информация">
+        <button type="button" data-go="about">О нас</button
+        ><button type="button" data-go="tos">TOS</button
+        ><button type="button" data-go="faq">FAQ</button>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+BEGIN;
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS artist varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS short_description text NOT NULL DEFAULT '';
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS full_description text NOT NULL DEFAULT '';
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS rating smallint NOT NULL DEFAULT 0 CHECK (rating BETWEEN 0 AND 10);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS mood varchar(12) NOT NULL DEFAULT '' CHECK (mood IN ('', 'happy', 'calm', 'sad', 'energetic'));
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS entry_date date;
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS entry_time time;
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS audio_filename varchar(40);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS cover_filename varchar(40);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS duration_seconds double precision CHECK (duration_seconds >= 0);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS privacy varchar(7) NOT NULL DEFAULT 'private' CHECK (privacy IN ('public', 'private'));
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS created_at timestamptz;
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS updated_at timestamptz;
+ALTER TABLE tracks ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE tracks ALTER COLUMN updated_at SET DEFAULT CURRENT_TIMESTAMP;
+CREATE INDEX IF NOT EXISTS tracks_owner_date_idx ON tracks (user_id, entry_date DESC, track_id DESC);
+COMMIT;

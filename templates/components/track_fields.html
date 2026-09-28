@@ -1,0 +1,144 @@
+{% set e = track if editing else {} %}
+{% set v = form_values|default({}) %}
+{% macro field_error(name) %}<small
+  class="profile-field-error"
+  data-track-error="{{ name }}"
+  role="alert"
+  {% if not (track_errors|default({})).get(name) %}hidden{% endif %}
+  >{{ (track_errors|default({})).get(name, '') }}</small
+>{% endmacro %}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+<label class="upload-field track-upload-wide"
+  >Загрузить трек
+  <input
+    type="file"
+    name="trackFile"
+    accept=".mp3,.wav,audio/mpeg,audio/wav"
+  /><span>MP3 / WAV · до 80 МБ</span>{{ field_error('trackFile') }}</label
+>
+<div class="review-media-editor track-create-editor">
+  <label class="review-cover-picker"
+    ><span
+      class="review-cover-preview"
+      id="{{ 'reviewCoverPreview' if editing else 'createCoverPreview' }}"
+      ><img
+        src="{{ e.cover if editing else url_for('static', filename='images/sonary-logo.jpg') }}"
+        alt="Предпросмотр обложки" /></span
+    ><input
+      name="cover"
+      type="file"
+      accept="image/png,image/jpeg,image/webp"
+      data-media-crop="cover"
+    /><span class="review-cover-change"
+      ><i class="bi bi-image"></i> Изменить обложку</span
+    >{{ field_error('cover') }}</label
+  >
+  <div class="review-track-fields">
+    <label
+      >Название
+      <input
+        type="text"
+        name="title"
+        maxlength="255"
+        value="{{ v.get('title', e.title|default('')) }}"
+        placeholder="Будет взято из файла"
+      />{{ field_error('title') }}</label
+    ><label
+      >Артист
+      <input
+        type="text"
+        name="artist"
+        maxlength="255"
+        value="{{ v.get('artist', e.artist|default('')) }}"
+        placeholder="Будет взят из файла"
+      />{{ field_error('artist') }}</label
+    >
+  </div>
+</div>
+<label
+  >Краткое описание
+  <textarea
+    name="shortDescription"
+    rows="3"
+    maxlength="10000"
+    placeholder="От 10 до 150 слов"
+  >
+{{ v.get('shortDescription', e.short_description|default('')) }}</textarea
+  ><span class="field-hint">10–150 слов</span
+  >{{ field_error('shortDescription') }}</label
+>
+<label
+  >Развёрнутое описание
+  <textarea
+    name="fullDescription"
+    rows="6"
+    maxlength="80000"
+    placeholder="До 1000 слов"
+  >
+{{ v.get('fullDescription', e.full_description|default('')) }}</textarea
+  ><span class="field-hint">До 1000 слов</span
+  >{{ field_error('fullDescription') }}</label
+>
+<div class="track-details">
+  <label
+    >Дата
+    <input
+      type="date"
+      name="trackDate"
+      value="{{ v.get('trackDate', e.date_iso|default('')) }}"
+    />{{ field_error('trackDate') }}</label
+  >
+  <label class="track-rating-field"
+    >Оценка
+    <span class="rating-control"
+      ><input
+        type="range"
+        name="trackRating"
+        min="0"
+        max="10"
+        value="{{ v.get('trackRating', e.rating|default(0)) }}"
+      /><output>{{ e.rating|default(0) }}/10</output></span
+    >{{ field_error('trackRating') }}</label
+  >
+  <label
+    >Настроение
+    <select name="trackMood">
+      {% for key,label in [('', 'Настроение'),('happy','Радостное'),('calm','Спокойное'),('sad','Грустное'),('energetic','Энергичное')] %}<option
+        value="{{ key }}"
+        {% if v.get('trackMood', e.mood_code|default('')) == key %}selected{% endif %}
+      >
+        {{ label }}
+      </option>{% endfor %}</select
+    >{{ field_error('trackMood') }}</label
+  >
+  <label
+    >Время
+    {% if editing %}<input
+      type="time"
+      name="trackTime"
+      value="{{ v.get('trackTime', e.time_iso) }}"
+    />{% else %}<input
+      type="text"
+      placeholder="Будет установлено автоматически"
+      readonly
+    />{% endif %}{{ field_error('trackTime') }}</label
+  >
+</div>
+<label
+  >Видимость записи
+  <select name="privacy">
+    <option
+      value="private"
+      {% if v.get('privacy', e.privacy|default('private')) == 'private' %}selected{% endif %}
+    >
+      Только мне
+    </option>
+    <option
+      value="public"
+      {% if v.get('privacy', e.privacy|default('private')) == 'public' %}selected{% endif %}
+    >
+      Всем пользователям
+    </option></select
+  >{{ field_error('privacy') }}</label
+>
+{{ field_error('form') }}

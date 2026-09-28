@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  {% include 'components/localization_assets.html' %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+  <style>
+    .sonary-frame .player-bar,
+    .sonary-frame body > .header,
+    .sonary-frame .main-container > .sidebar {
+      display: none !important;
+    }
+
+    .sonary-frame .main-container,
+    .sonary-frame .content-wrapper {
+      min-height: 0;
+      min-width: 0;
+      margin: 0 !important;
+    }
+
+    .sonary-frame {
+      --mobile-player-height: 0px !important;
+    }
+  </style>
+  <title>{% block title %}Sonary{% endblock %}</title>
+  <script>
+    if (localStorage.getItem("sonary-sidebar-collapsed") === "false") {
+      document.documentElement.classList.add("sidebar-expanded");
+    }
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-dark.css') }}" id="theme-stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app-unified.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/ui-states.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/progress-sliders.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-modals.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-light.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/player-volume.css') }}">
+  <script src="{{ url_for('static', filename='js/preferences.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='js/localization.js') }}"></script>
+</head>
+<body class="{% block body_class %}{% endblock %}" {% block body_attrs %}{% endblock %}>
+  {% include 'components/app_header.html' %}
+  <div class="main-container">
+    {% include 'components/sidebar.html' %}
+    <div class="content-wrapper">
+      {% block content %}{% endblock %}
+      {% block player %}{% include '_player.html' %}{% endblock %}
+    </div>
+  </div>
+
+  {% include 'modals/settings.html' %}
+  {% include 'modals/auth.html' %}
+  {% include 'modals/delete_dialogs.html' %}
+  {% include 'modals/queue.html' %}
+  {% include 'modals/queue_action.html' %}
+  {% include 'modals/add_to_playlist.html' %}
+  {% include 'modals/playlist_creation.html' %}
+  {% include 'modals/playlist_track_picker.html' %}
+  {% include 'modals/media_crop.html' %}
+  {% block page_modals %}{% endblock %}
+
+  <script src="{{ url_for('static', filename='js/sidebar-toggle.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/ui-states.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/modal-transitions.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/progress-sliders.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/developer-events.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/auth-success-sound.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/auth-client.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/profile-client.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/diary-client.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/action-row.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/playlist-client.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/playlist-track-picker.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/avatar-fallback.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/media-crop.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/profile-menu.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/settings-modal.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-icons.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/delete-dialogs.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/player.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/queue-modal.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/add-to-playlist-menu.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/create-playlist-modal.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/queue-action-menu.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/button-enhancements.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/mobile-navigation.js') }}" defer></script>
+                                                                                        
+  {% if diary_activity %}
+    <script id="diaryActivityData" type="application/json">{{ diary_activity|tojson }}</script>
+  {% endif %}
+  <script src="{{ url_for('static', filename='js/activity-data.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

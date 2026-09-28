@@ -1,0 +1,29 @@
+{% macro playlist_card(playlist) -%}
+  <article
+    class="playlist-card"
+    data-system-key="{{ playlist.system_key or '' }}"
+    data-playlist-id="{{ playlist.id }}"
+    data-href="{{ playlist.detail_url }}"
+  >
+    <div
+      class="playlist-art-shell"
+      role="button"
+      tabindex="0"
+      aria-pressed="false"
+      aria-label="Воспроизвести {{ playlist.title }}"
+    >
+      <img
+        class="playlist-art"
+        src="{{ playlist.cover }}"
+        alt="Обложка {{ playlist.title }}"
+      /><i class="bi bi-play-fill" aria-hidden="true"></i>
+    </div>
+    <div class="playlist-card-info">
+      <h2 {% if not playlist.system_key %}data-no-i18n{% endif %}>
+        {{ playlist.title }}
+      </h2>
+      <p data-no-i18n>{{ playlist.description }}</p>
+      <span>{{ playlist.track_count }} <span>треков</span></span>
+    </div>
+  </article>
+{%- endmacro %}

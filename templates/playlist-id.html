@@ -1,0 +1,79 @@
+{% extends 'layouts/app.html' %}
+{% block title %}Плейлист — Sonary{% endblock %}
+{% block content %}
+{% from 'components/cards/playlist_track_row.html' import playlist_track_row %}
+{% set playlist_items = playlist_tracks|default([]) %}
+<main class="content playlist-detail-page" data-system-key="{{ playlist.system_key or '' }}" data-playlist-id="{{ playlist.id }}">
+  {% include 'components/headers/playlist_detail_header.html' %}
+  <section class="playlist-detail-actions" aria-label="Действия плейлиста">
+    <div class="playlist-primary-actions">
+      <button class="listen-playlist-btn" type="button" title="Слушать" aria-label="Слушать">
+        <i class="bi bi-play-fill"></i>
+      </button>
+    </div>
+    {% if can_edit %}
+      <div class="playlist-edit-actions" aria-label="Управление плейлистом">
+        <button class="playlist-round-action" type="button" title="Добавить трек" aria-label="Добавить трек" data-playlist-add>
+          <i class="bi bi-plus-lg"></i>
+        </button>
+        <button
+          class="playlist-round-action"
+          type="button"
+          title="Удалить трек"
+          aria-label="Удалить трек"
+          data-playlist-remove
+          {% if not playlist_items %}disabled{% endif %}
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="playlist-more-wrap">
+          <button class="playlist-more-btn" id="playlistMoreBtn" type="button" aria-label="Дополнительные действия" aria-expanded="false">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="playlist-more-menu" id="playlistMoreMenu" hidden>
+            <label class="playlist-private-toggle">
+              <i class="bi bi-eye-slash"></i>
+              <span>Приватный плейлист</span>
+              <input
+                type="checkbox"
+                role="switch"
+                aria-label="Приватный плейлист"
+                {% if playlist.privacy == 'private' %}checked{% endif %}
+              >
+            </label>
+            <button type="button">
+              <i class="bi bi-share"></i>
+              <span>Поделиться</span>
+            </button>
+            <button type="button" data-edit-playlist>
+              <i class="bi bi-pencil"></i>
+              <span>Редактировать</span>
+            </button>
+            <button type="button" data-delete-playlist>
+              <i class="bi bi-trash3"></i>
+              <span>Удалить плейлист</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <script type="application/json" id="playlistEditData">{{ {'id':playlist.id, 'title':playlist.title,'description':playlist.description,'privacy':playlist.privacy}|tojson }}</script>
+    {% endif %}
+  </section>
+  <label class="playlist-search">
+    <i class="bi bi-search" aria-hidden="true"></i>
+    <input type="search" placeholder="Поиск трека" aria-label="Поиск трека">
+  </label>
+  <section class="playlist-track-list" data-loading-target aria-label="Треки плейлиста">
+    {% if playlist_items %}
+      {% for track in playlist_items %}
+        {{ playlist_track_row(track) }}
+      {% endfor %}
+    {% else %}
+      {% include 'components/cards/empty_playlist_tracks.html' %}
+    {% endif %}
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/playlist-detail.js') }}" defer></script>
+{% endblock %}

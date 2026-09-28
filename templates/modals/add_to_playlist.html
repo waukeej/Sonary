@@ -1,0 +1,25 @@
+<aside class="add-playlist-menu" id="addToPlaylistMenu" hidden>
+  <div class="add-playlist-title">Добавить в плейлист</div>
+  <div class="add-playlist-list">
+    {% for playlist in user_playlists|default([]) %}<label
+      class="add-playlist-row"
+      ><span class="add-playlist-name" data-no-i18n>{{ playlist.title }}</span
+      ><input
+        class="add-playlist-switch"
+        type="checkbox"
+        value="{{ playlist.id }}"
+    /></label>{% endfor %}
+  </div>
+  <button
+    class="add-playlist-submit"
+    id="addTrackToCheckedPlaylists"
+    type="button"
+    disabled
+    aria-disabled="true"
+  >
+    <i class="bi bi-check2"></i><span>Добавить</span>
+  </button>
+  <button class="add-playlist-create" id="createPlaylistFromMenu" type="button">
+    <i class="bi bi-plus-lg"></i><span>Создать плейлист</span>
+  </button>
+</aside>

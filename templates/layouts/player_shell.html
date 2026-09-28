@@ -1,0 +1,46 @@
+{% extends 'layouts/app.html' %}
+{% block body_class %}persistent-shell{% endblock %}
+{% block head %}
+  <script src="{{ url_for('static', filename='js/player-shell.js') }}"></script>
+  <style>
+    .persistent-shell .main-container {
+      min-height: 0;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex;
+      flex: 1;
+    }
+    .persistent-shell .content-wrapper {
+      min-height: 0;
+      min-width: 0;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex;
+      flex-direction: column;
+    }
+    #sonaryPage {
+      display: block;
+      width: 100%;
+      min-height: 0;
+      flex: 1;
+      border: 0;
+    }
+    .persistent-shell .player-bar {
+      position: relative !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      flex-shrink: 0;
+      z-index: 40;
+    }
+    .persistent-shell .ui-bottom-nav {
+      display: none !important;
+    }
+  </style>
+{% endblock %}
+{% block content %}<iframe
+  id="sonaryPage"
+  src="{{ request.full_path.rstrip('?') }}"
+  title="Sonary"
+  allow="autoplay"
+></iframe>{% endblock %}

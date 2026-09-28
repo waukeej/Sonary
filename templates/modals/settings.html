@@ -1,0 +1,221 @@
+<div class="settings-modal" id="settingsModal" hidden>
+  <div
+    class="settings-window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="settingsTitle"
+  >
+    <button
+      class="settings-close"
+      id="closeSettingsBtn"
+      type="button"
+      aria-label="Закрыть"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <aside class="settings-nav">
+      <h3>Настройки</h3>
+      <button
+        class="settings-tab"
+        type="button"
+        data-settings-tab="account"
+        disabled
+        aria-disabled="true"
+      >
+        Аккаунт</button
+      ><button
+        class="settings-tab"
+        type="button"
+        data-settings-tab="privacy"
+        disabled
+        aria-disabled="true"
+      >
+        Приватность</button
+      ><button
+        class="settings-tab active"
+        type="button"
+        data-settings-tab="general"
+      >
+        Основное
+      </button>
+    </aside>
+    <section class="settings-content">
+                                                                               
+      <div class="settings-panel" id="settings-account" hidden inert>
+        <h2>Аккаунт</h2>
+        <div class="settings-account-field">
+          <label for="settingsUsername">Логин</label>
+          <div class="settings-account-row">
+            <input
+              id="settingsUsername"
+              data-account-input
+              type="text"
+              autocomplete="username"
+              name="username"
+              value="{{ account.username }}"
+              maxlength="12"
+              readonly
+            /><button
+              class="settings-account-edit"
+              type="button"
+              data-edit-account-field="settingsUsername"
+            >
+              Редактировать
+            </button>
+          </div>
+          <small
+            class="profile-field-error"
+            data-profile-error="username"
+            role="alert"
+            hidden
+          ></small>
+        </div>
+        <div class="settings-account-field">
+          <label for="settingsName">Имя</label>
+          <div class="settings-account-row">
+            <input
+              id="settingsName"
+              data-account-input
+              type="text"
+              autocomplete="name"
+              name="display_name"
+              value="{{ account.display_name }}"
+              maxlength="100"
+              readonly
+            /><button
+              class="settings-account-edit"
+              type="button"
+              data-edit-account-field="settingsName"
+            >
+              Редактировать
+            </button>
+          </div>
+          <small
+            class="profile-field-error"
+            data-profile-error="display_name"
+            role="alert"
+            hidden
+          ></small>
+        </div>
+        <div class="settings-account-field">
+          <label for="settingsEmail">Почта</label>
+          <div class="settings-account-row">
+            <input
+              id="settingsEmail"
+              data-account-input
+              type="email"
+              autocomplete="email"
+              name="email"
+              value="{{ account.email }}"
+              maxlength="255"
+              readonly
+            /><button
+              class="settings-account-edit"
+              type="button"
+              data-edit-account-field="settingsEmail"
+            >
+              Редактировать
+            </button>
+          </div>
+          <small
+            class="profile-field-error"
+            data-profile-error="email"
+            role="alert"
+            hidden
+          ></small>
+        </div>
+        <hr />
+        <div class="settings-account-actions">
+          <button
+            class="settings-secondary"
+            type="button"
+            disabled
+            title="Восстановление пароля пока недоступно."
+          >
+            Сбросить пароль</button
+          ><button
+            class="settings-secondary settings-danger"
+            type="button"
+            data-settings-delete-account
+            disabled
+            title="Удаление недоступно: сначала нужно определить судьбу связанных треков."
+          >
+            Удалить аккаунт
+          </button>
+        </div>
+      </div>
+                                                                      
+      <div class="settings-panel" id="settings-privacy" hidden inert>
+        <h2>Приватность</h2>
+        <label
+          >Видимость профиля
+          <select id="settingsVisibility" name="profile_visibility">
+            <option
+              value="public"
+              {{ 'selected' if account.profile_visibility == 'public' }}
+            >
+              Всем пользователям
+            </option>
+            <option disabled>Только подписчикам</option>
+            <option
+              value="private"
+              {{ 'selected' if account.profile_visibility == 'private' }}
+            >
+              Только мне
+            </option></select
+          ><small
+            class="profile-field-error"
+            data-profile-error="profile_visibility"
+            role="alert"
+            hidden
+          ></small
+        ></label>
+        <label
+          >Приватность плейлистов
+          <select disabled title="Эта настройка появится позже.">
+            <option>Всем пользователям</option>
+            <option>Только подписчикам</option>
+            <option>Только мне</option>
+          </select></label
+        >
+        <label
+          >Видимость карточки
+          <select disabled title="Эта настройка появится позже.">
+            <option>Всем пользователям</option>
+            <option>Только подписчикам</option>
+            <option>Только мне</option>
+          </select></label
+        >
+      </div>
+      <div class="settings-panel active" id="settings-general">
+        <h2 id="settingsTitle">Основное</h2>
+        <label
+          >Тема
+          <select id="settingsTheme">
+            <option value="system">Системная</option>
+            <option value="light">Светлая</option>
+            <option value="dark">Тёмная</option>
+          </select></label
+        ><label
+          >Язык
+          <select id="settingsLanguage">
+            <option value="ru">Русский</option>
+            <option value="en">English</option>
+          </select></label
+        >
+        <p class="settings-release-note">
+          Часть настроек пока недоступна и появится в следующих обновлениях.
+        </p>
+      </div>
+      <small
+        class="profile-field-error"
+        data-profile-error="form"
+        role="alert"
+        hidden
+      ></small>
+      <div class="settings-footer">
+        <button type="button">Сохранить</button>
+      </div>
+    </section>
+  </div>
+</div>
