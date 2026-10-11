@@ -1,10 +1,13 @@
 # Sonary
 
-Sonary is a music diary for personal audio recordings, impressions of music, and personal collections. This is the first public development release in the **0.x** line.
+Sonary is a music diary for personal audio recordings, impressions of music, and personal collections. Version **0.1 — Security Update** builds on the first public development release.
 
 ## Features
 
-- Registration, login, and logout with password hashing, sessions, and CSRF protection.
+- Email-verified registration, login, and logout with password hashing, sessions, and CSRF protection.
+- Optional authenticator (TOTP) and email OTP two-factor authentication, with one-time recovery codes.
+- Password/factor Security Gate and a 120-second recent-verification window for security settings.
+- Shared six-digit OTP controls, password visibility toggles, and localized authentication flows.
 - MP3/WAV uploads with cover art, descriptions, entry dates, ratings, and predefined moods.
 - A diary, entry calendar, profile, and activity heatmap.
 - Regular playlists, Liked Tracks, and system mood playlists.
@@ -14,11 +17,11 @@ Sonary is a music diary for personal audio recordings, impressions of music, and
 - Mood filtering and diary sorting by rating or duration.
 - A responsive interface with RU/EN localization and System/Light/Dark themes.
 
-Some elements intended for future functionality remain as placeholders. Only General settings (theme and language) are currently available in Settings; Edit Profile is a separate interface. 2FA, social login, moderation, and notifications are not implemented.
+Some elements intended for future functionality remain as placeholders. General settings (theme and language) and Security are available; Edit Profile is a separate interface. Telegram authentication, social login, moderation, password reset, and general notifications are not implemented.
 
 ## Tech Stack
 
-Python 3.12+, Flask/Jinja, PostgreSQL (psycopg 3), Flask-WTF, HTML/CSS/JavaScript, Pillow, Mutagen, and imageio-ffmpeg. Bootstrap Icons and some client-side libraries are loaded from a CDN and therefore require network access.
+Python 3.12+, Flask/Jinja, PostgreSQL (psycopg 3), Flask-WTF, HTML/CSS/JavaScript, Pillow, Mutagen, imageio-ffmpeg, pyotp, and qrcode. SMTP uses Python’s standard library. Bootstrap Icons and some client-side libraries are loaded from a CDN and therefore require network access.
 
 ## Installation
 
@@ -63,6 +66,8 @@ python -c "import secrets; print(secrets.token_hex(32))"
 
 Store the result only in your local `.env` file. Do not publish it. Use `SESSION_COOKIE_SECURE=false` for local HTTP and `true` when using HTTPS.
 
+Configure `MAIL_HOST`, `MAIL_PORT`, `MAIL_FROM`, and the provider’s credentials (`MAIL_USERNAME`, `MAIL_PASSWORD`) locally. Use STARTTLS (`MAIL_USE_TLS=true`, `MAIL_USE_SSL=false`) or implicit TLS (`MAIL_USE_TLS=false`, `MAIL_USE_SSL=true`), never both. `MAIL_TIMEOUT` defaults to 10 seconds. New registrations require successful email verification and therefore working SMTP. See [Security Update deployment notes](SECURITY_UPDATE.md) for configuration and failure behavior.
+
 5. Configure PostgreSQL. Connect with `psql -U postgres` (or another available local administrator). Create a dedicated owner and a **new empty database**:
 
 ```sql
@@ -76,9 +81,13 @@ The `\password` command prompts for a password interactively. Enter the same pas
 
 ```sh
 psql -h localhost -U sonary -d sonary -v ON_ERROR_STOP=1 -f schema.sql
+psql -h localhost -U sonary -d sonary -v ON_ERROR_STOP=1 -f migrations/006_security.sql
+psql -h localhost -U sonary -d sonary -v ON_ERROR_STOP=1 -f migrations/007_registration_verification.sql
 ```
 
-`schema.sql` contains the current structure of five tables, including constraints and indexes, with **no data**. It initializes a new database; it is not an upgrade or reset tool for an existing database. It already includes the changes from `migrations/001–005`, so those migrations do not need to be reapplied to a fresh installation. The older migrations are retained for historical reference. The application creates system playlists for registered users.
+`schema.sql` contains the baseline structure of five tables, including constraints and indexes, with **no data**. It initializes a new database; it is not an upgrade or reset tool for an existing database. It already includes the changes from `migrations/001–005`, so those migrations do not need to be reapplied to a fresh installation. The older migrations are retained for historical reference. Apply 006 and then 007 after the baseline, as shown above. The application creates system playlists for registered users.
+
+For an **existing installation** already at migrations 001–005, back up the database and apply only missing migrations 006 and 007 in order. Do not run `schema.sql` against it. Migrations are not run automatically; do not reapply an already-applied migration. Existing accounts retain access, and their historical email addresses are not marked verified automatically. No database is modified as part of release packaging.
 
 6. Start the application:
 
@@ -130,9 +139,8 @@ Useful Python and Node tests are retained, but they were not run as part of rele
 
 ## Project Status
 
-Sonary is an early public **0.x** development release under active development. Packaging for GitHub does not change or fix the application's current functionality. Future development plans do not imply that the corresponding features are already available; a public hosted deployment requires separate preparation.
+Sonary is an early public **0.x** development release under active development. Version 0.1 includes the security and registration changes documented in [CHANGELOG.md](CHANGELOG.md). Future development plans do not imply that the corresponding features are already available; a public hosted deployment requires separate preparation.
 
 ## License
 
 No license has been selected yet, and a LICENSE file was not added automatically. Before distributing the project, define the licensing terms for the code and verify the rights to all bundled graphic and audio materials.
-

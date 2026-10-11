@@ -1,0 +1,6 @@
+{% macro otp_input(id, name='code', attrs='') -%}
+<div class="sonary-otp" data-otp>
+  <input id="{{ id }}" name="{{ name }}" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" spellcheck="false" {{ attrs|safe }}>
+  <div class="sonary-otp-slots" aria-hidden="true" data-no-i18n><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+{%- endmacro %}

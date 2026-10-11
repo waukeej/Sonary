@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/progress-sliders.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-modals.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/security.css') }}">
   {% block head %}{% endblock %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-light.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/player-volume.css') }}">
@@ -54,6 +55,7 @@
   </div>
 
   {% include 'modals/settings.html' %}
+  {% if is_member %}{% include 'modals/security_reminder.html' %}{% endif %}
   {% include 'modals/auth.html' %}
   {% include 'modals/delete_dialogs.html' %}
   {% include 'modals/queue.html' %}
@@ -80,6 +82,7 @@
   <script src="{{ url_for('static', filename='js/media-crop.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/profile-menu.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/settings-modal.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/security-settings.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/bootstrap-icons.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/delete-dialogs.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/player.js') }}" defer></script>

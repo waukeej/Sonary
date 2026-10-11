@@ -1,7 +1,5 @@
 {% for language in ('ru', 'en') %}
-  <link
-    rel="localization"
-    hreflang="{{ language }}"
-    href="{{ url_for('static', filename='localaise-' ~ language ~ '.json') }}"
-  />
+  <link rel="localization" hreflang="{{ language }}" href="{{ url_for('static', filename='localaise-' ~ language ~ '.json') }}">
 {% endfor %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth-inputs.css') }}">
+<script src="{{ url_for('static', filename='js/auth-inputs.js') }}" defer></script>

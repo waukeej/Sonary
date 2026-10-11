@@ -50,6 +50,7 @@
       defer
       src="{{ url_for('static', filename='js/localization.js') }}"
     ></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/security.css') }}">
   </head>
   <body>
     <div class="welcome-intro" aria-hidden="true">
@@ -132,6 +133,8 @@
           ><button type="submit">Дальше</button>
         </form>
 
+        {% include 'components/login_second_factor.html' %}
+        {% include 'components/registration_verification.html' %}
         <form
           method="post"
           class="welcome-view welcome-form"

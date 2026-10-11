@@ -1,5 +1,4 @@
 import re
-from psycopg.errors import UniqueViolation, CheckViolation
 from werkzeug.security import generate_password_hash, check_password_hash
 from auth import queries
 
@@ -23,7 +22,7 @@ def check_registration_availability(data):
             'email_available': not taken['email_taken']}, None, None
 
 
-def register_user(data):
+def validate_registration(data):
     username = data.get('username', '').strip()
     email = data.get('email', '').strip().lower()
     password = data.get('password', '')
@@ -34,17 +33,12 @@ def register_user(data):
         return None, 'Пароль должен содержать от 8 до 128 символов.', None
     if password != data.get('passwordConfirmation'):
         return None, 'Пароли не совпадают.', None
-    try:
-        return queries.insert_user(username, email, generate_password_hash(password)), None, None
-    except UniqueViolation as conflict:
-        constraint = conflict.diag.constraint_name or ''
-        if 'username' in constraint:
-            return None, 'Этот логин уже занят.', 'username'
-        if 'email' in constraint:
-            return None, 'Эта почта уже занята.', 'email'
-        return None, 'Этот логин или адрес почты уже занят.', None
-    except CheckViolation:
-        return None, 'Данные аккаунта не прошли проверку.', None
+    taken = queries.registration_availability(username, email)
+    if taken['username_taken']:
+        return None, 'Этот логин уже занят.', 'username'
+    if taken['email_taken']:
+        return None, 'Эта почта уже занята.', 'email'
+    return {'username': username, 'email': email, 'password_hash': generate_password_hash(password)}, None, None
 
 
 def authenticate(identity, password):

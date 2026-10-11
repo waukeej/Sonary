@@ -15,29 +15,8 @@
     </button>
     <aside class="settings-nav">
       <h3>Настройки</h3>
-      <button
-        class="settings-tab"
-        type="button"
-        data-settings-tab="account"
-        disabled
-        aria-disabled="true"
-      >
-        Аккаунт</button
-      ><button
-        class="settings-tab"
-        type="button"
-        data-settings-tab="privacy"
-        disabled
-        aria-disabled="true"
-      >
-        Приватность</button
-      ><button
-        class="settings-tab active"
-        type="button"
-        data-settings-tab="general"
-      >
-        Основное
-      </button>
+      <button class="settings-tab active" type="button" data-settings-tab="general">Основное</button>
+      <button class="settings-tab" type="button" data-settings-tab="security">Безопасность</button>
     </aside>
     <section class="settings-content">
                                                                                
@@ -213,6 +192,7 @@
         role="alert"
         hidden
       ></small>
+      {% include 'components/security_settings.html' %}
       <div class="settings-footer">
         <button type="button">Сохранить</button>
       </div>

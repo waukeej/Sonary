@@ -89,6 +89,11 @@ def update_profile(user, data, files):
     old = None
     try:
         with get_db().transaction():
+            if 'email' in fields and fields['email'] != user['email']:
+                from auth.security import locked_security
+                protection = locked_security(user['user_id'])
+                if protection['two_factor_enabled']:
+                    return {'email': 'Перед сменой почты отключите 2FA с подтверждением в разделе «Безопасность».'}
             row = queries.lock_user(user['user_id'])
             if not row:
                 return {'form': 'Аккаунт больше недоступен. Войдите снова.'}

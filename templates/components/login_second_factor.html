@@ -1,0 +1,15 @@
+{% from 'components/otp_input.html' import otp_input %}
+<form method="post" class="welcome-view welcome-form" data-view="login-factor" hidden novalidate>
+  <button class="welcome-back" type="button" data-back>← Назад</button>
+  <p class="welcome-eyebrow">ВХОД</p>
+  <h2>Двухфакторная аутентификация</h2>
+  <p data-login-factor-message></p>
+  <p data-login-email data-no-i18n hidden></p>
+  <div data-login-otp><label for="loginOtp">Код подтверждения</label>{{ otp_input('loginOtp', attrs='aria-describedby="loginFactorError"') }}</div>
+  <label data-login-recovery-area hidden>Резервный код<input name="recovery_code" type="text" autocomplete="off" maxlength="128" aria-describedby="loginFactorError"></label>
+  <button type="button" class="auth-resend" data-login-resend hidden>Отправить код</button>
+  <small id="loginFactorError" data-auth-error role="alert" hidden></small>
+  <small data-auth-status role="status"></small>
+  <button type="button" class="auth-recovery" data-login-recovery>Использовать резервный код</button>
+  <button type="submit">Войти</button>
+</form>

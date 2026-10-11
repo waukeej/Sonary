@@ -1,0 +1,14 @@
+{% from 'components/otp_input.html' import otp_input %}
+<form method="post" class="welcome-view welcome-form" data-view="register-email" hidden novalidate>
+  <button class="welcome-back" type="button" data-correct-email>← Назад</button>
+  <p class="welcome-eyebrow">РЕГИСТРАЦИЯ</p>
+  <h2>Подтвердите электронную почту</h2>
+  <p data-registration-description></p>
+  <p data-registration-email data-no-i18n></p>
+  <label for="registrationOtp">Код подтверждения</label>
+  {{ otp_input('registrationOtp', attrs='aria-describedby="registrationOtpError"') }}
+  <button type="button" class="auth-resend" data-registration-resend>Отправить повторно</button>
+  <small id="registrationOtpError" data-auth-error role="alert" hidden></small>
+  <small data-auth-status role="status"></small>
+  <button type="submit">Подтвердить email</button>
+</form>

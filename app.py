@@ -3,6 +3,7 @@ from config import load_config
 from database import close_db
 from flask_wtf.csrf import CSRFProtect, CSRFError
 from auth.routes import bp as auth_bp, load_current_user
+from auth.security_routes import bp as security_bp
 from main.routes import bp as main_bp
 from pathlib import Path
 from profile_backend.routes import bp as profile_bp, profile_data
@@ -23,6 +24,7 @@ def create_app(test_config=None):
     app.teardown_appcontext(close_db)
     app.before_request(load_current_user)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(security_bp)
     app.register_blueprint(main_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(diary_bp)

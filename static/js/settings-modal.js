@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openButton = document.getElementById("openSettingsBtn");
   const closeButton = document.getElementById("closeSettingsBtn");
   const closeModal = () => {
+    if (window.SonarySecurity?.cancelGate()) return;
     window.SonaryModal?.close(modal);
   };
 
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   modal?.querySelectorAll(".settings-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
       if (tab.disabled) return;
+      if (tab.dataset.settingsTab !== "security") window.SonarySecurity?.leave();
       modal
         .querySelectorAll(".settings-tab, .settings-panel")
         .forEach((item) => item.classList.remove("active"));
@@ -31,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
       modal
         .querySelector(`#settings-${tab.dataset.settingsTab}`)
         .classList.add("active");
+      modal.querySelector(".settings-footer").hidden = tab.dataset.settingsTab === "security";
+      if (tab.dataset.settingsTab === "security") window.SonarySecurity?.load();
     });
   });
 

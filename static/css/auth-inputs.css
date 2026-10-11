@@ -1,0 +1,21 @@
+.sonary-otp { position: relative; width: 100%; max-width: 360px; min-width: 0; }
+.sonary-otp .sonary-otp-slots { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 8px; pointer-events: none; }
+.sonary-otp .sonary-otp-slots span { display: grid; place-items: center; min-width: 0; height: 48px; box-sizing: border-box; border: 1px solid var(--theme-border,#6a5138); border-radius: var(--radius-control,9px); color: var(--theme-text,#f5e6c8); background: var(--theme-background,#1e1b18); font-size: 22px; font-weight: 600; }
+.sonary-otp input { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; opacity: 0; margin: 0 !important; cursor: text; }
+.sonary-otp:focus-within .is-current { border-color: var(--theme-accent,#ff9f43); box-shadow: 0 0 0 2px color-mix(in srgb,var(--theme-accent,#ff9f43) 30%,transparent); }
+.sonary-otp.is-disabled { opacity: .5; }
+.sonary-otp.is-invalid .sonary-otp-slots span { border-color: var(--theme-accent,#ff9f43); }
+.password-control { position: relative; display: block; width: 100%; min-width: 0; }
+.password-control > input { box-sizing: border-box; padding-right: 48px !important; }
+.password-control > button[data-password-toggle] { position: absolute !important; right: 2px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 40px !important; min-width: 40px !important; height: 38px !important; min-height: 38px !important; padding: 8px !important; margin: 0 !important; border: 0 !important; border-radius: 7px; background: transparent !important; color: var(--theme-text-muted,#c9b99a) !important; cursor: pointer; }
+.password-control button svg { width: 22px; height: 22px; }
+.password-control [data-eye-slash][hidden] { display: none; }
+.password-control > button:hover, .password-control > button[aria-pressed="true"] { color: var(--theme-accent,#ff9f43) !important; }
+.password-control > button:focus-visible { outline: 2px solid var(--theme-accent,#ff9f43); outline-offset: -2px; }
+.welcome-form button.auth-resend, .welcome-form button.auth-recovery { width: fit-content; min-height: 40px; padding: 8px 14px; font: inherit; font-size: 14px; border-radius: var(--radius-control,9px); border: 1px solid var(--theme-border,#6a5138); background: var(--theme-surface,#241812); color: var(--theme-text,#f5e6c8); cursor: pointer; }
+.welcome-form button.auth-recovery { border: 0; background: transparent; padding-left: 0; color: var(--theme-accent,#ff9f43); text-align: left; }
+.welcome-form button.auth-resend:disabled { opacity: .5; cursor: default; }
+.welcome-form [hidden] { display: none !important; }
+.welcome-form [data-auth-error] { color: var(--theme-accent,#ff9f43); }
+.welcome-form [data-auth-status] { color: var(--theme-text-muted,#c9b99a); }
+@media(max-width:600px) { .sonary-otp .sonary-otp-slots { gap:5px; } .sonary-otp .sonary-otp-slots span { height:44px; } }

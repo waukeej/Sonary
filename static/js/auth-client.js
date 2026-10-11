@@ -39,6 +39,7 @@ window.SonaryAuth = {
           "Не удалось выполнить запрос.",
       );
       error.field = result.field;
+      error.retryAfter = result.retry_after;
       error.sourceMessage = result.error;
       error.fields = result.errors;
       throw error;

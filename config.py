@@ -8,6 +8,14 @@ def load_config():
     load_dotenv(Path(__file__).with_name('.env'))
     return {
         'SECRET_KEY': os.getenv('SECRET_KEY'),
+        'MAIL_HOST': os.getenv('MAIL_HOST', ''),
+        'MAIL_PORT': os.getenv('MAIL_PORT', '587'),
+        'MAIL_TIMEOUT': os.getenv('MAIL_TIMEOUT', '10'),
+        'MAIL_USERNAME': os.getenv('MAIL_USERNAME', ''),
+        'MAIL_PASSWORD': os.getenv('MAIL_PASSWORD', ''),
+        'MAIL_FROM': os.getenv('MAIL_FROM', ''),
+        'MAIL_USE_TLS': os.getenv('MAIL_USE_TLS', 'true').lower() == 'true',
+        'MAIL_USE_SSL': os.getenv('MAIL_USE_SSL', 'false').lower() == 'true',
         **{key: os.getenv(key) for key in ('DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD')},
         'MAX_CONTENT_LENGTH': 90 * 1024 * 1024,
         'TRACK_AUDIO_FOLDER': str(Path(__file__).parent / 'instance' / 'tracks' / 'audio'),

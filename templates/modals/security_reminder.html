@@ -1,0 +1,13 @@
+<div class="settings-modal" id="securityReminder" hidden>
+  <div class="settings-window security-reminder-window" role="dialog" aria-modal="true" aria-labelledby="securityReminderTitle">
+    <section class="settings-content">
+      <img class="security-reminder-avatar" data-profile-avatar data-avatar-seed="{{ account.id }}" data-avatar-custom="{{ 'true' if account.avatar_url else 'false' }}" src="{{ account.avatar_url or url_for('static', filename='images/avatars/avatar-1.png') }}" alt="Аватарка">
+      <h2 id="securityReminderTitle">Защитите свой аккаунт</h2>
+      <p>Подключите двухфакторную аутентификацию для дополнительной защиты аккаунта.</p>
+      <div class="security-actions">
+        <button class="settings-secondary" type="button" data-security-later>Потом</button>
+        <button class="settings-secondary" type="button" data-security-connect>Подключить</button>
+      </div>
+    </section>
+  </div>
+</div>

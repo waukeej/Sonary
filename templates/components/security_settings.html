@@ -1,0 +1,56 @@
+{% from 'components/otp_input.html' import otp_input %}
+<div class="settings-panel security-panel" id="settings-security" hidden>
+  <h2>Безопасность</h2>
+  <h3>Двухфакторная аутентификация</h3>
+  <p>Защитите аккаунт с помощью дополнительного подтверждения при входе.</p>
+  <p data-security-status role="status"></p>
+  <p data-security-load-error class="profile-field-error" role="alert" hidden></p>
+  <button type="button" class="settings-secondary" data-security-reload hidden>Повторить</button>
+  <section data-security-connected hidden>
+    <h3>Подключённые способы</h3>
+    <div data-security-connected-list class="security-method-list"></div>
+  </section>
+  <section data-security-available hidden>
+    <h3>Доступные способы</h3>
+    <div data-security-available-list class="security-method-list"></div>
+  </section>
+</div>
+<div id="securityFlowModal" aria-labelledby="securityFlowTitle" hidden>
+    <div class="security-flow-content">
+      <span class="security-mark" aria-hidden="true">S</span>
+      <h2 id="securityFlowTitle"></h2>
+      <p data-flow-description></p>
+      <form data-flow-form novalidate>
+        <div data-flow-password-area hidden>
+          <label for="securityGatePassword">Текущий пароль</label>
+          <input id="securityGatePassword" data-flow-password type="password" autocomplete="current-password" maxlength="128" aria-describedby="securityFlowError">
+        </div>
+        <p data-flow-email data-no-i18n hidden></p>
+        <div class="security-qr-layout" data-flow-totp hidden>
+          <img data-flow-qr alt="QR-код для приложения-аутентификатора">
+          <div>
+            <span>Ключ настройки</span>
+            <code data-flow-secret data-no-i18n></code>
+            <button type="button" class="settings-secondary" data-flow-copy-secret>Копировать</button>
+          </div>
+        </div>
+        <div data-flow-code-area hidden>
+          <label for="securityGateCode" data-flow-code-label>Код подтверждения</label>
+          {{ otp_input('securityGateCode', attrs='data-flow-code aria-describedby="securityFlowError"') }}
+        </div>
+        <div data-flow-recovery-area hidden><label for="securityRecoveryCode">Резервный код</label><input id="securityRecoveryCode" data-flow-recovery-code type="text" maxlength="128" autocomplete="off" aria-describedby="securityFlowError"></div>
+        <button type="button" class="settings-secondary" data-flow-send hidden>Отправить код</button>
+        <small id="securityFlowError" class="profile-field-error" role="alert" data-flow-error hidden></small>
+        <small data-flow-notice role="status"></small>
+        <button type="button" class="security-text-action" data-flow-recovery hidden>Использовать резервный код</button>
+        <div data-flow-codes-area hidden>
+          <pre data-flow-codes data-no-i18n></pre>
+          <button type="button" class="settings-secondary" data-flow-copy-codes>Копировать все коды</button>
+        </div>
+        <div class="security-actions">
+          <button type="button" class="settings-secondary" data-security-close>Отмена</button>
+          <button type="submit" class="settings-secondary" data-flow-submit>Продолжить</button>
+        </div>
+      </form>
+    </div>
+</div>
